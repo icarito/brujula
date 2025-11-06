@@ -1,0 +1,34 @@
+# Godot-specific ignores
+.import/
+.godot/
+export.cfg
+export_presets.cfg
+*.tmp
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+.godot/
+data_*/
+
+# UID files (Godot 4.4+ generates these automatically)
+*.uid
+
+# Temporary and cache files
+*.log
+*.bak
+*~
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+/build/
+/dist/
+/node_modules/
+
+# Old/removed directories
+/addons/fp_controller
+/assets
+/ref

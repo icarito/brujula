@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqqwnso2xk3vx"]
+
+[ext_resource type="PackedScene" uid="uid://cchu8vhopmuyj" path="res://scenes/barrels.glb" id="1_mnylo"]
+[ext_resource type="Script" uid="uid://dmeh01c5ccjqc" path="res://addons/cogito/CogitoObjects/cogito_object.gd" id="2_cogito"]
+[ext_resource type="PackedScene" uid="uid://cio4x05ipvslu" path="res://addons/cogito/Components/Interactions/CarryableComponent.tscn" id="3_carryable"]
+[ext_resource type="Material" path="res://scenes/barrel.res" id="4_barrel_mat"]
+[ext_resource type="Material" path="res://scenes/planks.res" id="5_planks_mat"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wej6r"]
+size = Vector3(0.6259155, 0.4963379, 0.29424286)
+
+[node name="barrels2" type="RigidBody3D" unique_id=1208943182]
+mass = 200.0
+script = ExtResource("2_cogito")
+cogito_name = "Barrel"
+display_name = "Barrel"
+
+[node name="barrels" parent="." unique_id=1521743742 instance=ExtResource("1_mnylo")]
+
+[node name="barrels" parent="barrels" index="0"]
+surface_material_override/0 = ExtResource("4_barrel_mat")
+surface_material_override/1 = ExtResource("5_planks_mat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=150387818]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017974854, 0.24614143, 0.011043549)
+shape = SubResource("BoxShape3D_wej6r")
+
+[node name="CarryableComponent" parent="." unique_id=1650618285 instance=ExtResource("3_carryable")]
+carry_distance_offset = 0.5

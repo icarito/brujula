@@ -1,0 +1,543 @@
+[gd_scene load_steps=72 format=3 uid="uid://bhcf56o8msjwq"]
+
+[ext_resource type="PackedScene" uid="uid://bh0obl3q2wyuv" path="res://addons/godot_aerodynamic_physics/demo/aircraft_examples/su57/su57.glb" id="1_6jmm2"]
+[ext_resource type="Script" uid="uid://3kjm0rdymoth" path="res://addons/godot_aerodynamic_physics/core/aero_influencer_3d/aero_thruster_3d/aero_thruster_3d.gd" id="2_5b6kh"]
+[ext_resource type="Script" uid="uid://cc5dwx5pqkaur" path="res://addons/godot_aerodynamic_physics/components/AeroControlComponent.gd" id="2_dne2k"]
+[ext_resource type="Script" uid="uid://c46td0go5kvp6" path="res://addons/godot_aerodynamic_physics/core/control_configs/aero_influencer_control_axis_config.gd" id="3_4gyjs"]
+[ext_resource type="Script" uid="uid://b4xqlunpiyivk" path="res://addons/godot_aerodynamic_physics/utils/pid.gd" id="3_gdxys"]
+[ext_resource type="Script" uid="uid://cblxodmmwvpt6" path="res://addons/godot_aerodynamic_physics/core/control_configs/aero_influencer_control_config.gd" id="4_m6a2n"]
+[ext_resource type="Script" uid="uid://cdp8dc63ytxx1" path="res://addons/godot_aerodynamic_physics/core/flight_assist.gd" id="4_myln2"]
+[ext_resource type="Script" uid="uid://dfbhcpt1rr3ai" path="res://addons/godot_aerodynamic_physics/core/control_configs/aero_control_config_axis.gd" id="5_2cb04"]
+[ext_resource type="Script" uid="uid://d1725od371u4a" path="res://addons/godot_aerodynamic_physics/core/aero_influencer_3d/aero_surface_3d/manual_aero_surface_3d/manual_aero_surface_3d.gd" id="5_tc445"]
+[ext_resource type="Script" uid="uid://ctbwb7xlhft6t" path="res://addons/godot_aerodynamic_physics/core/aero_influencer_3d/aero_surface_3d/manual_aero_surface_3d/manual_aero_surface_config.gd" id="6_1gcqf"]
+[ext_resource type="Script" uid="uid://cbgqb7g7mmwtu" path="res://addons/godot_aerodynamic_physics/core/control_configs/aero_control_config.gd" id="6_1uofs"]
+[ext_resource type="PackedScene" uid="uid://bddf1hhmmre47" path="res://addons/godot_aerodynamic_physics/demo/misc_demo_assets/flight_info_label.tscn" id="7_gdxys"]
+[ext_resource type="Script" uid="uid://crkbhmxpjff4o" path="res://addons/godot_aerodynamic_physics/core/aero_influencer_3d/aero_surface_3d/aero_surface_config.gd" id="7_u36rk"]
+[ext_resource type="Script" uid="uid://cy2j3ls8g16s2" path="res://addons/godot_aerodynamic_physics/demo/misc_demo_assets/ball_launcher.gd" id="14_myln2"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dne2k"]
+friction = 0.0
+
+[sub_resource type="Resource" id="Resource_gdxys"]
+script = ExtResource("3_gdxys")
+p = 0.001
+i = 0.0
+d = 0.01
+
+[sub_resource type="Resource" id="Resource_myln2"]
+script = ExtResource("3_gdxys")
+i = 0.05
+d = 0.1
+
+[sub_resource type="Resource" id="Resource_2cb04"]
+script = ExtResource("3_gdxys")
+p = 10.0
+i = 0.3
+d = 4.0
+
+[sub_resource type="Resource" id="Resource_1uofs"]
+script = ExtResource("3_gdxys")
+p = 0.8
+i = 0.0
+
+[sub_resource type="Resource" id="Resource_5f3f6"]
+script = ExtResource("3_gdxys")
+p = 25.0
+i = 0.0
+
+[sub_resource type="Resource" id="Resource_lnl23"]
+script = ExtResource("3_gdxys")
+p = 10.0
+i = 0.0
+
+[sub_resource type="Resource" id="Resource_nqbes"]
+script = ExtResource("3_gdxys")
+p = 10.0
+i = 0.0
+
+[sub_resource type="Resource" id="Resource_xusdh"]
+script = ExtResource("3_gdxys")
+p = 0.5
+i = 7.0
+clamp_integral = true
+min_integral = -0.2
+max_integral = 0.4
+
+[sub_resource type="Resource" id="Resource_elfl8"]
+script = ExtResource("3_gdxys")
+p = 0.2
+i = 0.0
+
+[sub_resource type="Resource" id="Resource_jra4t"]
+script = ExtResource("3_gdxys")
+p = 0.0
+i = 0.4
+
+[sub_resource type="Resource" id="Resource_jpx3d"]
+script = ExtResource("3_gdxys")
+i = 0.0
+
+[sub_resource type="Resource" id="Resource_f17xe"]
+script = ExtResource("4_myln2")
+pitch_assist_pid = SubResource("Resource_xusdh")
+yaw_assist_pid = SubResource("Resource_jpx3d")
+roll_assist_pid = SubResource("Resource_elfl8")
+enable_aoa_limiter = false
+bank_angle_pid = SubResource("Resource_myln2")
+heading_pid = SubResource("Resource_lnl23")
+inclination_pid = SubResource("Resource_nqbes")
+speed_pid = SubResource("Resource_jra4t")
+altitude_pid = SubResource("Resource_gdxys")
+direction_pitch_pid = SubResource("Resource_2cb04")
+direction_yaw_pid = SubResource("Resource_5f3f6")
+direction_roll_pid = SubResource("Resource_1uofs")
+metadata/_custom_type_script = "uid://cdp8dc63ytxx1"
+
+[sub_resource type="Resource" id="Resource_34386"]
+resource_name = "pitch"
+script = ExtResource("5_2cb04")
+axis_name = "pitch"
+positive_event = &"pitch_up"
+negative_event = &"pitch_down"
+
+[sub_resource type="Resource" id="Resource_o6rpv"]
+resource_name = "yaw"
+script = ExtResource("5_2cb04")
+axis_name = "yaw"
+positive_event = &"yaw_left"
+negative_event = &"yaw_right"
+
+[sub_resource type="Resource" id="Resource_wtjbh"]
+resource_name = "roll"
+script = ExtResource("5_2cb04")
+axis_name = "roll"
+positive_event = &"roll_left"
+negative_event = &"roll_right"
+
+[sub_resource type="Resource" id="Resource_jsx6i"]
+resource_name = "throttle"
+script = ExtResource("5_2cb04")
+axis_name = "throttle"
+min_limit = 0.0
+cumulative_positive_event = &"throttle_up"
+cumulative_negative_event = &"throttle_down"
+
+[sub_resource type="Resource" id="Resource_b1qmm"]
+resource_name = "brake"
+script = ExtResource("5_2cb04")
+axis_name = "brake"
+positive_event = &"brake_up"
+negative_event = &"brake_down"
+metadata/_custom_type_script = "uid://dfbhcpt1rr3ai"
+
+[sub_resource type="Resource" id="Resource_hd44f"]
+script = ExtResource("6_1uofs")
+axis_configs = Array[ExtResource("5_2cb04")]([SubResource("Resource_34386"), SubResource("Resource_o6rpv"), SubResource("Resource_wtjbh"), SubResource("Resource_jsx6i"), SubResource("Resource_b1qmm")])
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tc445"]
+radius = 0.845685
+height = 6.06128
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dne2k"]
+height = 3.58321
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1gcqf"]
+radius = 0.516512
+height = 6.06128
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u36rk"]
+radius = 0.718297
+height = 8.4116
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6o7h7"]
+size = Vector3(4.15845, 0.725586, 10.8723)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n4vvt"]
+size = Vector3(14.209, 0.725586, 1.65185)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x87ek"]
+size = Vector3(9.13818, 0.725586, 2.37939)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sknif"]
+size = Vector3(0.148438, 2.79877, 1.13062)
+
+[sub_resource type="Resource" id="Resource_d6oai"]
+resource_name = "throttle"
+script = ExtResource("3_4gyjs")
+axis_name = "throttle"
+contribution = Vector3(-1, -1, -1)
+
+[sub_resource type="Resource" id="Resource_vl4uj"]
+script = ExtResource("4_m6a2n")
+axis_configs = Array[ExtResource("3_4gyjs")]([SubResource("Resource_d6oai")])
+use_separate_minmax = true
+min_value = Vector3(0, 0, -1)
+
+[sub_resource type="Resource" id="Resource_dd1vo"]
+resource_name = "pitch"
+script = ExtResource("3_4gyjs")
+axis_name = "pitch"
+contribution = Vector3(-1, 0, 0)
+metadata/_custom_type_script = "uid://c46td0go5kvp6"
+
+[sub_resource type="Resource" id="Resource_yj8r3"]
+resource_name = "roll"
+script = ExtResource("3_4gyjs")
+axis_name = "roll"
+contribution = Vector3(1, 0, 0)
+axis_flip_x = 1
+metadata/_custom_type_script = "uid://c46td0go5kvp6"
+
+[sub_resource type="Resource" id="Resource_w120p"]
+resource_name = "yaw"
+script = ExtResource("3_4gyjs")
+axis_name = "yaw"
+contribution = Vector3(0, -1, 0)
+metadata/_custom_type_script = "uid://c46td0go5kvp6"
+
+[sub_resource type="Resource" id="Resource_prjxi"]
+script = ExtResource("4_m6a2n")
+axis_configs = Array[ExtResource("3_4gyjs")]([SubResource("Resource_dd1vo"), SubResource("Resource_yj8r3"), SubResource("Resource_w120p")])
+max_value = Vector3(0.4, 0.4, 0)
+min_value = Vector3(-0.4, -0.4, 0)
+metadata/_custom_type_script = "uid://cblxodmmwvpt6"
+
+[sub_resource type="Curve" id="Curve_1uofs"]
+_limits = [0.0, 1.0, -180.0, 180.0]
+bake_resolution = 21
+_data = [Vector2(-180, 0), 0.0, 0.0, 0, 0, Vector2(-90, 1), 0.0, 0.0, 0, 0, Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(90, 1), 0.0, 0.0, 0, 0, Vector2(180, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_gdxys"]
+_limits = [1.0, 2.0, 0.0, 2.0]
+bake_resolution = 23
+_data = [Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0, Vector2(2, 1.2), 0.181, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_dne2k"]
+_limits = [-1.0, 1.0, -180.0, 180.0]
+bake_resolution = 36
+_data = [Vector2(-180, 0), 0.0, 0.0, 0, 0, Vector2(-148, 1), 0.0, 0.0, 0, 0, Vector2(-145, 0.7), 0.0, 0.0, 0, 0, Vector2(-35, -0.7), 0.0, 0.0, 0, 0, Vector2(-32, -1), 0.0, 0.0, 0, 0, Vector2(32, 1), 0.0, 0.0, 0, 0, Vector2(35, 0.7), 0.0, 0.0, 0, 0, Vector2(137.426, -0.7), 0.0, 0.0, 0, 0, Vector2(148, -1), 0.0, 0.0, 0, 0, Vector2(180, 0), 0.0, 0.0, 0, 0]
+point_count = 10
+
+[sub_resource type="Curve" id="Curve_2cb04"]
+bake_resolution = 4
+_data = [Vector2(0, 1), 0.0, -2.09824, 0, 0, Vector2(0.406542, 0.490909), -0.666575, -0.666575, 0, 0, Vector2(1, 0.290909), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_13llr"]
+script = ExtResource("6_1gcqf")
+min_lift_coefficient = -2.0
+max_lift_coefficient = 2.0
+lift_aoa_curve = SubResource("Curve_dne2k")
+max_drag_coefficient = 0.5
+drag_aoa_curve = SubResource("Curve_1uofs")
+sweep_drag_multiplier_curve = SubResource("Curve_2cb04")
+drag_at_mach_multiplier_curve = SubResource("Curve_gdxys")
+
+[sub_resource type="Resource" id="Resource_ekjou"]
+script = ExtResource("7_u36rk")
+chord = 3.875
+span = 5.155
+area = 19.975625
+aspect_ratio = 1.3303225806451613
+
+[sub_resource type="Resource" id="Resource_e5uxm"]
+script = ExtResource("6_1gcqf")
+min_lift_coefficient = -2.0
+max_lift_coefficient = 2.0
+lift_aoa_curve = SubResource("Curve_dne2k")
+min_drag_coefficient = 0.0
+max_drag_coefficient = 0.5
+drag_aoa_curve = SubResource("Curve_1uofs")
+sweep_drag_multiplier_curve = SubResource("Curve_2cb04")
+drag_at_mach_multiplier_curve = SubResource("Curve_gdxys")
+
+[sub_resource type="Resource" id="Resource_qyjay"]
+script = ExtResource("7_u36rk")
+chord = 0.798
+span = 3.1200000000000006
+area = 2.4897600000000004
+aspect_ratio = 3.9097744360902262
+
+[sub_resource type="Resource" id="Resource_4vll8"]
+resource_name = "roll"
+script = ExtResource("3_4gyjs")
+axis_name = "roll"
+contribution = Vector3(1, 0, 0)
+axis_flip_x = 1
+metadata/_custom_type_script = "uid://c46td0go5kvp6"
+
+[sub_resource type="Resource" id="Resource_f02ck"]
+script = ExtResource("4_m6a2n")
+axis_configs = Array[ExtResource("3_4gyjs")]([SubResource("Resource_4vll8")])
+max_value = Vector3(0.5, 0, 0)
+min_value = Vector3(-0.5, 0, 0)
+metadata/_custom_type_script = "uid://cblxodmmwvpt6"
+
+[sub_resource type="Resource" id="Resource_5vt4r"]
+script = ExtResource("6_1gcqf")
+min_lift_coefficient = -2.0
+max_lift_coefficient = 2.0
+lift_aoa_curve = SubResource("Curve_dne2k")
+min_drag_coefficient = 0.01
+max_drag_coefficient = 0.5
+drag_aoa_curve = SubResource("Curve_1uofs")
+sweep_drag_multiplier_curve = SubResource("Curve_2cb04")
+drag_at_mach_multiplier_curve = SubResource("Curve_gdxys")
+
+[sub_resource type="Resource" id="Resource_6hon5"]
+script = ExtResource("7_u36rk")
+chord = 2.616
+span = 2.8649999999999998
+area = 7.49484
+aspect_ratio = 1.095183486238532
+
+[sub_resource type="Resource" id="Resource_r2kyo"]
+resource_name = "pitch"
+script = ExtResource("3_4gyjs")
+axis_name = "pitch"
+contribution = Vector3(-1, 0, 0)
+metadata/_custom_type_script = "uid://c46td0go5kvp6"
+
+[sub_resource type="Resource" id="Resource_rjloe"]
+resource_name = "roll"
+script = ExtResource("3_4gyjs")
+axis_name = "roll"
+contribution = Vector3(0.5, 0, 0)
+axis_flip_x = 1
+metadata/_custom_type_script = "uid://c46td0go5kvp6"
+
+[sub_resource type="Resource" id="Resource_dne2k"]
+script = ExtResource("4_m6a2n")
+axis_configs = Array[ExtResource("3_4gyjs")]([SubResource("Resource_r2kyo"), SubResource("Resource_rjloe")])
+max_value = Vector3(0.8, 0, 0)
+min_value = Vector3(-0.8, 0, 0)
+metadata/_custom_type_script = "uid://cblxodmmwvpt6"
+
+[sub_resource type="Curve" id="Curve_5f3f6"]
+_limits = [0.0, 1.0, -180.0, 180.0]
+bake_resolution = 21
+_data = [Vector2(-180, 0), 0.0, 0.0, 0, 0, Vector2(-90, 1), 0.0, 0.0, 0, 0, Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(90, 1), 0.0, 0.0, 0, 0, Vector2(180, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_6kdxg"]
+_limits = [1.0, 2.0, 0.0, 2.0]
+bake_resolution = 23
+_data = [Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0, Vector2(2, 1.2), 0.181, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_myln2"]
+_limits = [-1.0, 1.0, -180.0, 180.0]
+bake_resolution = 36
+_data = [Vector2(-180, 0), 0.0, 0.0, 0, 0, Vector2(-148, 1), 0.0, 0.0, 0, 0, Vector2(-145, 0.7), 0.0, 0.0, 0, 0, Vector2(-35, -0.7), 0.0, 0.0, 0, 0, Vector2(-32, -1), 0.0, 0.0, 0, 0, Vector2(32, 1), 0.0, 0.0, 0, 0, Vector2(35, 0.7), 0.0, 0.0, 0, 0, Vector2(137.426, -0.7), 0.0, 0.0, 0, 0, Vector2(148, -1), 0.0, 0.0, 0, 0, Vector2(180, 0), 0.0, 0.0, 0, 0]
+point_count = 10
+
+[sub_resource type="Curve" id="Curve_f17xe"]
+bake_resolution = 4
+_data = [Vector2(0, 1), 0.0, -2.09824, 0, 0, Vector2(0.406542, 0.490909), -0.666575, -0.666575, 0, 0, Vector2(1, 0.290909), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_1ghes"]
+script = ExtResource("6_1gcqf")
+min_lift_coefficient = -0.7
+max_lift_coefficient = 0.7
+lift_aoa_curve = SubResource("Curve_myln2")
+max_drag_coefficient = 0.5
+drag_aoa_curve = SubResource("Curve_5f3f6")
+sweep_drag_multiplier_curve = SubResource("Curve_f17xe")
+drag_at_mach_multiplier_curve = SubResource("Curve_6kdxg")
+
+[sub_resource type="Resource" id="Resource_dfwn2"]
+script = ExtResource("7_u36rk")
+chord = 8.68
+span = 4.3439999999999985
+area = 37.705919999999985
+aspect_ratio = 0.5004608294930875
+
+[sub_resource type="Resource" id="Resource_uxcik"]
+script = ExtResource("7_u36rk")
+chord = 1.71
+span = 2.195
+area = 3.7534499999999995
+aspect_ratio = 1.283625730994152
+
+[sub_resource type="Resource" id="Resource_pgu1l"]
+resource_name = "yaw"
+script = ExtResource("3_4gyjs")
+axis_name = "yaw"
+contribution = Vector3(-1, 0, 0)
+axis_flip_x = 1
+metadata/_custom_type_script = "uid://c46td0go5kvp6"
+
+[sub_resource type="Resource" id="Resource_qc6jj"]
+script = ExtResource("4_m6a2n")
+axis_configs = Array[ExtResource("3_4gyjs")]([SubResource("Resource_pgu1l")])
+max_value = Vector3(0.4, 0, 0)
+min_value = Vector3(-0.4, 0, 0)
+metadata/_custom_type_script = "uid://cblxodmmwvpt6"
+
+[node name="su57" instance=ExtResource("1_6jmm2")]
+mass = 26700.0
+physics_material_override = SubResource("PhysicsMaterial_dne2k")
+center_of_mass = Vector3(0, 0, 2.5)
+can_sleep = false
+show_debug = true
+
+[node name="AeroControlComponent" type="Node" parent="." index="0"]
+script = ExtResource("2_dne2k")
+flight_assist = SubResource("Resource_f17xe")
+control_config = SubResource("Resource_hd44f")
+metadata/_custom_type_script = "uid://cc5dwx5pqkaur"
+
+[node name="Camera3D" type="Camera3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.22123, 19.438)
+far = 100000.0
+
+[node name="Label3D" type="Label3D" parent="Camera3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11, 1.57529, -2.9862)
+text = "Controls:
+Pitch: W/A
+Yaw: Q/E
+Roll: A/D
+Throttle: Shift/Ctrl
+Launch Ball: Space"
+
+[node name="FlightInfoLabel" parent="Camera3D" index="1" instance=ExtResource("7_gdxys")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="9"]
+transform = Transform3D(1, 0, 0, 0, 0.133606, 0.991035, 0, -0.991035, 0.133606, 0, 0.353375, -3.73247)
+visible = false
+shape = SubResource("CapsuleShape3D_tc445")
+
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="." index="10"]
+transform = Transform3D(6.12303e-17, -1, 0, 1, 6.12303e-17, 0, 0, 0, 1, 0, -1.37836, -2.43463)
+shape = SubResource("CapsuleShape3D_dne2k")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, -0.0053582, 0.999986, 0, -0.999986, -0.0053582, 0, 0.0623442, -6.59913)
+visible = false
+shape = SubResource("CapsuleShape3D_1gcqf")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, -0.0432881, 0.999062, 0, -0.999062, -0.0432881, 1.35211, -0.0116499, 3.34535)
+visible = false
+shape = SubResource("CapsuleShape3D_u36rk")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." index="13"]
+transform = Transform3D(1, 0, 0, 0, -0.0432881, 0.999062, 0, -0.999062, -0.0432881, -1.352, -0.012, 3.345)
+visible = false
+shape = SubResource("CapsuleShape3D_u36rk")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="." index="14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.137207, 2.64088)
+visible = false
+shape = SubResource("BoxShape3D_6o7h7")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="." index="15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.137207, 5.40478)
+visible = false
+shape = SubResource("BoxShape3D_n4vvt")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="." index="16"]
+transform = Transform3D(0.654187, 0, -0.756333, 0, 1, 0, 0.756333, 0, 0.654187, 3.24416, 0.137207, 1.93217)
+visible = false
+shape = SubResource("BoxShape3D_x87ek")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="." index="17"]
+transform = Transform3D(0.654741, 0, 0.755853, 0, 1, 0, -0.755853, 0, 0.654741, -3.244, 0.137, 1.932)
+visible = false
+shape = SubResource("BoxShape3D_x87ek")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="." index="18"]
+transform = Transform3D(0.906308, -0.317293, 0.279161, 0.422618, 0.680438, -0.598664, -7.44872e-09, 0.660552, 0.75078, -2.78259, 1.21385, 5.94426)
+visible = false
+shape = SubResource("BoxShape3D_sknif")
+
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="." index="19"]
+transform = Transform3D(0.906619, 0.316446, -0.279113, -0.42195, 0.680536, -0.599024, 0.000387371, 0.660858, 0.750511, 2.783, 1.214, 5.944)
+visible = false
+shape = SubResource("BoxShape3D_sknif")
+
+[node name="AeroThruster3DR" type="Node3D" parent="." index="20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.41904, 0, 8.09758)
+script = ExtResource("2_5b6kh")
+throttle_control_config = SubResource("Resource_vl4uj")
+max_thrust_force = 142000.0
+actuation_config = SubResource("Resource_prjxi")
+show_thrust = true
+metadata/_custom_type_script = "uid://3kjm0rdymoth"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="AeroThruster3DR" index="0"]
+size = Vector3(0.25, 0.25, 3)
+
+[node name="AeroThruster3DL" type="Node3D" parent="." index="21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.419, 0, 8.098)
+script = ExtResource("2_5b6kh")
+throttle_control_config = SubResource("Resource_vl4uj")
+max_thrust_force = 142000.0
+actuation_config = SubResource("Resource_prjxi")
+show_thrust = true
+metadata/_custom_type_script = "uid://3kjm0rdymoth"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="AeroThruster3DL" index="0"]
+size = Vector3(0.25, 0.25, 3)
+
+[node name="WingR" type="Node3D" parent="." index="22"]
+transform = Transform3D(0.675204, 0, -0.737631, 0, 1, 0, 0.737631, 0, 0.675204, 3.83881, 0, 2.18251)
+script = ExtResource("5_tc445")
+manual_config = SubResource("Resource_13llr")
+wing_config = SubResource("Resource_ekjou")
+mirror_axis = 1
+metadata/_custom_type_script = "uid://d1725od371u4a"
+
+[node name="AileronR" type="Node3D" parent="WingR" index="0"]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 3.33325, 0, 1.52311)
+script = ExtResource("5_tc445")
+manual_config = SubResource("Resource_e5uxm")
+wing_config = SubResource("Resource_qyjay")
+actuation_config = SubResource("Resource_f02ck")
+metadata/_custom_type_script = "uid://d1725od371u4a"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WingR/AileronR" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.695391)
+size = Vector3(3.19043, 0.25, 1.83203)
+
+[node name="ElevonR2" type="Node3D" parent="." index="23"]
+transform = Transform3D(0.707107, -3.09086e-08, -0.707107, 1.28028e-08, 1, -3.09086e-08, 0.707107, 1.28027e-08, 0.707107, 3.84164, -8.88178e-16, 7.51748)
+rotation_order = 4
+script = ExtResource("5_tc445")
+manual_config = SubResource("Resource_5vt4r")
+wing_config = SubResource("Resource_6hon5")
+mirror_axis = 1
+actuation_config = SubResource("Resource_dne2k")
+metadata/_custom_type_script = "uid://d1725od371u4a"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ElevonR2" index="0"]
+transform = Transform3D(1, 1.24345e-14, 0, -1.13687e-13, 1, 8.88178e-16, 0, -2.66454e-13, 1, 1.1044099999999999e-29, 1.79399e-15, 1.01986)
+size = Vector3(2.75366, 0.408203, 1.51563)
+
+[node name="Body" type="Node3D" parent="." index="24"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.829038)
+script = ExtResource("5_tc445")
+manual_config = SubResource("Resource_1ghes")
+wing_config = SubResource("Resource_dfwn2")
+metadata/_custom_type_script = "uid://d1725od371u4a"
+
+[node name="RudderR2" type="Node3D" parent="." index="25"]
+transform = Transform3D(0.320158, -0.907044, -0.273441, 0.689722, 0.421036, -0.589078, 0.649448, 0, 0.760406, 2.853, 1.338, 6.216)
+rotation_order = 5
+script = ExtResource("5_tc445")
+manual_config = SubResource("Resource_13llr")
+wing_config = SubResource("Resource_uxcik")
+mirror_axis = 1
+actuation_config = SubResource("Resource_qc6jj")
+metadata/_custom_type_script = "uid://d1725od371u4a"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="RudderR2" index="0"]
+transform = Transform3D(1, 1.13705e-07, -1.01328e-06, 7.97294e-08, 0.999999, 3.68959e-07, 4.17233e-07, -2.36298e-06, 0.999999, -4.76837e-07, 0, 0.403564)
+size = Vector3(2.42773, 0.117432, 1.80713)
+
+[node name="BallLauncher" type="Marker3D" parent="." index="26"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.12893, -7.60912)
+script = ExtResource("14_myln2")

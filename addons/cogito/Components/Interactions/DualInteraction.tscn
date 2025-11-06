@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqp8nl7x2c37m"]
+
+[ext_resource type="Script" uid="uid://d1kfc1qtxt8cp" path="res://addons/cogito/Components/Interactions/DualInteraction.gd" id="1_onadr"]
+[ext_resource type="PackedScene" uid="uid://c62m84iy6lkk5" path="res://addons/cogito/Components/UI/UI_ProgressWheel.tscn" id="2_cfkt0"]
+
+[node name="DualInteraction" type="Node3D"]
+script = ExtResource("1_onadr")
+
+[node name="HoldTimer" type="Timer" parent="."]
+
+[node name="HoldUi" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressWheel" parent="HoldUi" instance=ExtResource("2_cfkt0")]
+layout_mode = 0

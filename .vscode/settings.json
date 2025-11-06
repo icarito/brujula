@@ -1,0 +1,8 @@
+{
+  "mcpsx.servers": {
+    "godot": {
+      "command": "/mnt/sdd/home/icarito/Proyectos/cogito---immersive-sim-template/tools/godot-mcp/run-godot-mcp.sh",
+      "args": []
+    }
+  }
+}

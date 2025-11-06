@@ -1,0 +1,10 @@
+{
+	"servers": {
+		"godot": {
+			"type": "stdio",
+			"command": "./tools/godot-mcp/run-godot-mcp.sh",
+			"args": []
+		}
+	},
+	"inputs": []
+}

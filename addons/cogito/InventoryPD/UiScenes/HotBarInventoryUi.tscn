@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf2qmquc7ys81"]
+
+[ext_resource type="Script" uid="uid://mtx3cfvehcs2" path="res://addons/cogito/InventoryPD/UiScenes/hot_bar_inventory.gd" id="1_0qfsu"]
+[ext_resource type="PackedScene" uid="uid://btf6bmlgtfk1b" path="res://addons/cogito/Components/DynamicInputIcon.tscn" id="10_ipb46"]
+
+[node name="HotBarInventory" type="PanelContainer"]
+offset_right = 160.0
+offset_bottom = 48.0
+script = ExtResource("1_0qfsu")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="TopRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BottomRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/BottomRow"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 10
+
+[node name="DynamicInputIcon" parent="MarginContainer/VBoxContainer/BottomRow/MarginContainer" instance=ExtResource("10_ipb46")]
+position = Vector2(32, 16)
+scale = Vector2(0.5, 0.5)
+action_name = "quickslot_1"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/BottomRow"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DynamicInputIcon" parent="MarginContainer/VBoxContainer/BottomRow/MarginContainer2" instance=ExtResource("10_ipb46")]
+position = Vector2(32, 16)
+scale = Vector2(0.5, 0.5)
+action_name = "quickslot_2"
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/BottomRow"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DynamicInputIcon" parent="MarginContainer/VBoxContainer/BottomRow/MarginContainer3" instance=ExtResource("10_ipb46")]
+position = Vector2(32, 16)
+scale = Vector2(0.5, 0.5)
+action_name = "quickslot_3"
+
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/VBoxContainer/BottomRow"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DynamicInputIcon" parent="MarginContainer/VBoxContainer/BottomRow/MarginContainer4" instance=ExtResource("10_ipb46")]
+position = Vector2(32, 16)
+scale = Vector2(0.5, 0.5)
+action_name = "quickslot_4"

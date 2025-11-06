@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://s8jh8lepju8r"]
+
+[ext_resource type="Texture2D" uid="uid://nxl0y8bc2g61" path="res://assets/Panorama_Ocean_02-2048x1024.png" id="1_1d02l"]
+[ext_resource type="PackedScene" uid="uid://kicjwmh02uwf" path="res://addons/cogito/PackedScenes/cogito_player.tscn" id="1_cb835"]
+[ext_resource type="PackedScene" uid="uid://bqqwnso2xk3vx" path="res://barrels_2.tscn" id="2_skxnn"]
+[ext_resource type="Texture2D" uid="uid://b2d55cotelf1f" path="res://assets/planks.png" id="3_fyaxs"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_skxnn"]
+panorama = ExtResource("1_1d02l")
+energy_multiplier = 1.21
+
+[sub_resource type="Sky" id="Sky_ewq44"]
+sky_material = SubResource("PanoramaSkyMaterial_skxnn")
+
+[sub_resource type="Environment" id="Environment_6a4tb"]
+background_mode = 2
+sky = SubResource("Sky_ewq44")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_cb835"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fyaxs"]
+albedo_texture = ExtResource("3_fyaxs")
+metallic = 1.0
+metallic_specular = 0.74
+metallic_texture = ExtResource("3_fyaxs")
+metallic_texture_channel = 2
+roughness = 0.35
+uv1_scale = Vector3(20, 20, 20)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_50or8"]
+lightmap_size_hint = Vector2i(102, 102)
+material = SubResource("StandardMaterial3D_fyaxs")
+size = Vector2(20, 20)
+
+[node name="Node3D" type="Node3D" unique_id=1551107300]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1349271940]
+environment = SubResource("Environment_6a4tb")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="WorldEnvironment" unique_id=1342227201]
+transform = Transform3D(-0.91216576, -0.26152372, -0.31552964, 0.00828593, -0.7815314, 0.62381095, -0.4097377, 0.56640446, 0.71505314, -10.952616, 5.2923374, 23.15334)
+spot_range = 50.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment" unique_id=420607869]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -86.33834, 39.836704, 163.97183)
+light_volumetric_fog_energy = 2.108
+shadow_enabled = true
+omni_range = 100.0
+omni_attenuation = 0.406
+omni_shadow_mode = 0
+
+[node name="CogitoPlayer" parent="." unique_id=1202050524 instance=ExtResource("1_cb835")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 1.6095476, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1694400454]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=574775360]
+shape = SubResource("WorldBoundaryShape3D_cb835")
+debug_fill = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=466213827]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6243763, 0)
+mesh = SubResource("PlaneMesh_50or8")
+
+[node name="barrels2" parent="." unique_id=1208943182 instance=ExtResource("2_skxnn")]
+transform = Transform3D(0.43062133, 0, 0.9025327, 0, 1, 0, -0.9025327, 0, 0.43062133, 0, -0.6243763, 0)
