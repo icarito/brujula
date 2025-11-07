@@ -14,10 +14,11 @@ cogito_name = "Barrel"
 display_name = "Barrel"
 
 [node name="barrels" parent="." instance=ExtResource("1_mnylo")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017974854, 0.24614143, 0.011043549)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.017974854, 0.7557939, 0.011043549)
 shape = SubResource("BoxShape3D_wej6r")
 
 [node name="CarryableComponent" parent="." instance=ExtResource("3_carryable")]
-carry_distance_offset = 0.5
+carry_distance_offset = 0.4

@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://s8jh8lepju8r"]
+[gd_scene load_steps=14 format=3 uid="uid://s8jh8lepju8r"]
 
 [ext_resource type="Texture2D" uid="uid://nxl0y8bc2g61" path="res://assets/Panorama_Ocean_02-2048x1024.png" id="1_1d02l"]
 [ext_resource type="PackedScene" uid="uid://kicjwmh02uwf" path="res://addons/cogito/PackedScenes/cogito_player.tscn" id="1_cb835"]
 [ext_resource type="PackedScene" uid="uid://bqqwnso2xk3vx" path="res://scenes/barrels_2.tscn" id="2_skxnn"]
 [ext_resource type="Texture2D" uid="uid://b2d55cotelf1f" path="res://assets/planks.png" id="3_fyaxs"]
+[ext_resource type="Texture2D" uid="uid://cbe47rnki0uoj" path="res://assets/planks_normal.png" id="4_planksn"]
+[ext_resource type="Script" uid="uid://c43ldeee5wwb4" path="res://scenes/scripts/apply_pbr_overrides.gd" id="5_overrides"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_skxnn"]
 panorama = ExtResource("1_1d02l")
@@ -16,15 +18,24 @@ sky_material = SubResource("PanoramaSkyMaterial_skxnn")
 background_mode = 2
 sky = SubResource("Sky_ewq44")
 ambient_light_source = 3
+ssao_enabled = true
+ssao_radius = 0.25
+ssao_intensity = 0.8
+ssao_power = 1.0
+ssao_horizon = 0.25
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_min_cell_size = 1.0
+sdfgi_energy = 0.9
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fyaxs"]
 albedo_texture = ExtResource("3_fyaxs")
-metallic = 0.39
-metallic_specular = 0.2
-metallic_texture = ExtResource("3_fyaxs")
-metallic_texture_channel = 2
-roughness = 0.35
-uv1_scale = Vector3(20, 20, 20)
+metallic_specular = 0.15
+roughness = 0.6
+normal_enabled = true
+normal_scale = -0.91
+normal_texture = ExtResource("4_planksn")
+uv1_scale = Vector3(15, 15, 15)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_50or8"]
 lightmap_size_hint = Vector2i(102, 102)
@@ -37,40 +48,22 @@ size = Vector3(20, 1, 20)
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_cb835"]
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("5_overrides")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6a4tb")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(-0.91216576, -0.26152372, -0.31552964, 0.00828593, -0.7815314, 0.62381095, -0.4097377, 0.56640446, 0.71505314, -10.952616, 5.2923374, 23.15334)
-shadow_enabled = true
-light_energy = 0.6
-spot_angle = 40.0
-spot_range = 50.0
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -86.33834, 39.836704, 163.97183)
-light_volumetric_fog_energy = 1.0
-shadow_enabled = false
-light_energy = 0.2
-light_specular = 0.5
-omni_range = 50.0
-omni_attenuation = 0.5
-omni_shadow_mode = 0
-
 [node name="Sun" type="DirectionalLight3D" parent="."]
-rotation_degrees = Vector3(-25, -35, 0)
+transform = Transform3D(0.81915206, 0.24240388, -0.5198368, 0, 0.90630776, 0.42261827, 0.57357645, -0.34618863, 0.74240386, 0, 0, 0)
 shadow_enabled = true
-shadow_max_distance = 150.0
-light_energy = 1.0
+
 [node name="CogitoPlayer" parent="." instance=ExtResource("1_cb835")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 1.6095476, 0)
+transform = Transform3D(-0.8515439, 0, 0.5242832, 0, 1, 0, -0.5242831, 0, -0.851544, 2.1364222, 1.6095476, -5.354737)
 
 [node name="Platform" type="StaticBody3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Platform"]
 mesh = SubResource("PlaneMesh_50or8")
-cast_shadow = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platform"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
