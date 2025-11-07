@@ -19,10 +19,21 @@ func _ready() -> void:
 	_apply_barrels_override()
 
 func _apply_floor_override() -> void:
-	var mi := get_node_or_null(FLOOR_PATH) as MeshInstance3D
-	if mi == null:
-		push_warning("No se encontró el Mesh del piso en %s" % FLOOR_PATH)
+	# Buscar el mesh del piso desde el nodo raíz padre
+	var root = get_parent()
+	if not root:
+		push_warning("No se encontró nodo padre para buscar el piso")
 		return
+	
+	var mi: MeshInstance3D = null
+	var platform = root.get_node_or_null("Platform")
+	if platform:
+		mi = platform.get_node_or_null("MeshInstance3D")
+	
+	if mi == null:
+		push_warning("No se encontró el Mesh del piso (buscado en Platform/MeshInstance3D)")
+		return
+		
 	var ntex := load(PLANKS_NORMAL) as Texture2D
 	if ntex == null:
 		push_warning("No se encontró normal del piso: %s" % PLANKS_NORMAL)
@@ -31,10 +42,20 @@ func _apply_floor_override() -> void:
 	_apply_normal_override(mi, ntex, floor_normal_scale, albedo)
 
 func _apply_barrels_override() -> void:
-	var barrels_node := get_node_or_null(BARRELS_PATH)
-	if barrels_node == null:
-		push_warning("No se encontró el nodo de barriles en %s" % BARRELS_PATH)
+	# Buscar barriles desde el nodo raíz padre
+	var root = get_parent()
+	if not root:
+		push_warning("No se encontró nodo padre para buscar barriles")
 		return
+		
+	var barrels_node = root.get_node_or_null("barrels2")
+	if barrels_node:
+		barrels_node = barrels_node.get_node_or_null("barrels")
+	
+	if barrels_node == null:
+		push_warning("No se encontró el nodo de barriles (buscado en barrels2/barrels)")
+		return
+		
 	var ntex := load(BARREL_NORMAL) as Texture2D
 	if ntex == null:
 		push_warning("No se encontró normal del barril: %s" % BARREL_NORMAL)

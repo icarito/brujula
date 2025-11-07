@@ -7,18 +7,18 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_wej6r"]
 size = Vector3(0.6259155, 0.4963379, 0.29424286)
 
-[node name="barrels2" type="RigidBody3D"]
+[node name="barrels2" type="RigidBody3D" unique_id=552492791]
 mass = 200.0
 script = ExtResource("2_cogito")
 cogito_name = "Barrel"
 display_name = "Barrel"
 
-[node name="barrels" parent="." instance=ExtResource("1_mnylo")]
+[node name="barrels" parent="." unique_id=1448961753 instance=ExtResource("1_mnylo")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=711639589]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.017974854, 0.7557939, 0.011043549)
 shape = SubResource("BoxShape3D_wej6r")
 
-[node name="CarryableComponent" parent="." instance=ExtResource("3_carryable")]
+[node name="CarryableComponent" parent="." unique_id=1918177986 instance=ExtResource("3_carryable")]
 carry_distance_offset = 0.4
