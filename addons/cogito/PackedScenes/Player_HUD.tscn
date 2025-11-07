@@ -60,7 +60,7 @@ content_margin_right = 0.0
 content_margin_bottom = 0.0
 bg_color = Color(0.101961, 0.101961, 0.101961, 0.784314)
 
-[node name="Player_HUD" type="Control" node_paths=PackedStringArray("fixed_stamina_bar", "ui_currency_area", "attribute_display_node")]
+[node name="Player_HUD" type="Control" unique_id=1455069 node_paths=PackedStringArray("fixed_stamina_bar", "ui_currency_area", "attribute_display_node")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -79,7 +79,7 @@ ui_currency_area = NodePath("InventoryInterface/CogitoTabMenu/Inventory/PlayerCu
 attribute_display_node = NodePath("InventoryInterface/CogitoTabMenu/Stats/QuestDisplay/VBoxContainer/TabContainer/Attributes")
 ui_attribute_display_prefab = ExtResource("20_3jei3")
 
-[node name="FixedStaminaBar" parent="." instance=ExtResource("20_lscav")]
+[node name="FixedStaminaBar" parent="." unique_id=1948009635 instance=ExtResource("20_lscav")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -102,7 +102,7 @@ bar_stylebox = SubResource("StyleBoxFlat_8x37p")
 [node name="AttributeLabel" parent="FixedStaminaBar/HBoxContainer" index="2"]
 visible = false
 
-[node name="DamageOverlay" type="Control" parent="."]
+[node name="DamageOverlay" type="Control" parent="." unique_id=911598604]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,7 +110,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="DamageOverlay"]
+[node name="TextureRect" type="TextureRect" parent="DamageOverlay" unique_id=435790219]
 material = SubResource("CanvasItemMaterial_1f12m")
 layout_mode = 1
 anchors_preset = 15
@@ -121,7 +121,7 @@ grow_vertical = 2
 texture = ExtResource("3_lb6l4")
 expand_mode = 5
 
-[node name="Crosshair" type="Control" parent="."]
+[node name="Crosshair" type="Control" parent="." unique_id=1578686124]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -132,7 +132,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="Crosshair"]
+[node name="TextureRect" type="TextureRect" parent="Crosshair" unique_id=1201800893]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -148,10 +148,10 @@ grow_vertical = 2
 texture = ExtResource("3_ahile")
 expand_mode = 1
 
-[node name="HintTimer" type="Timer" parent="."]
+[node name="HintTimer" type="Timer" parent="." unique_id=258599399]
 wait_time = 3.5
 
-[node name="PromptArea" type="VBoxContainer" parent="."]
+[node name="PromptArea" type="VBoxContainer" parent="." unique_id=696101313]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.578125
@@ -161,7 +161,7 @@ anchor_bottom = 0.5
 theme_override_constants/separation = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer_BottomUI" type="MarginContainer" parent="."]
+[node name="MarginContainer_BottomUI" type="MarginContainer" parent="." unique_id=1214791647]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -174,7 +174,7 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="WieldableHud" type="PanelContainer" parent="MarginContainer_BottomUI"]
+[node name="WieldableHud" type="PanelContainer" parent="MarginContainer_BottomUI" unique_id=1972431723]
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_filter = 2
@@ -183,55 +183,56 @@ theme = ExtResource("5_j6s1a")
 theme_type_variation = &"HUDPanel"
 script = ExtResource("8_2nbvg")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer_BottomUI/WieldableHud"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer_BottomUI/WieldableHud" unique_id=1721425174]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer" unique_id=2146914444]
 layout_mode = 2
 
-[node name="WieldableData" type="HBoxContainer" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer"]
+[node name="WieldableData" type="HBoxContainer" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer" unique_id=882721047]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="WieldableIcon" type="TextureRect" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer/WieldableData"]
+[node name="WieldableIcon" type="TextureRect" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer/WieldableData" unique_id=1613958180]
 layout_mode = 2
 texture = ExtResource("9_1l2nt")
 expand_mode = 3
 
-[node name="WieldableChargeLabel" type="Label" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer/WieldableData"]
+[node name="WieldableChargeLabel" type="Label" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer/WieldableData" unique_id=1418866528]
 layout_mode = 2
 theme = ExtResource("5_j6s1a")
 theme_type_variation = &"HUDLabel"
 text = "00"
 label_settings = SubResource("LabelSettings_q4xln")
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer" unique_id=2076550744]
 layout_mode = 2
 
-[node name="AmmoData" type="HBoxContainer" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer"]
+[node name="AmmoData" type="HBoxContainer" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer" unique_id=193113332]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="AmmoIcon" type="TextureRect" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer/AmmoData"]
+[node name="AmmoIcon" type="TextureRect" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer/AmmoData" unique_id=198217130]
 layout_mode = 2
 texture = ExtResource("10_bnneb")
 expand_mode = 3
 
-[node name="AmmoLabel" type="Label" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer/AmmoData"]
+[node name="AmmoLabel" type="Label" parent="MarginContainer_BottomUI/WieldableHud/MarginContainer/VBoxContainer/AmmoData" unique_id=1528754050]
 layout_mode = 2
 theme = ExtResource("5_j6s1a")
 theme_type_variation = &"HUDLabel"
 text = "00"
 label_settings = SubResource("LabelSettings_ossw8")
 
-[node name="PlayerAttributes" type="PanelContainer" parent="MarginContainer_BottomUI"]
+[node name="PlayerAttributes" type="PanelContainer" parent="MarginContainer_BottomUI" unique_id=1511051191]
+visible = false
 clip_contents = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
@@ -241,7 +242,7 @@ mouse_filter = 2
 theme = ExtResource("5_j6s1a")
 theme_type_variation = &"HUDPanel"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer_BottomUI/PlayerAttributes"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer_BottomUI/PlayerAttributes" unique_id=1347607388]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 4
@@ -249,12 +250,13 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_BottomUI/PlayerAttributes/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer_BottomUI/PlayerAttributes/MarginContainer" unique_id=1323747929]
 layout_mode = 2
 size_flags_vertical = 8
 alignment = 1
 
-[node name="InventoryInterface" type="Control" parent="." node_paths=PackedStringArray("inventory_ui", "nodes_to_show")]
+[node name="InventoryInterface" type="Control" parent="." unique_id=1217537661 node_paths=PackedStringArray("inventory_ui", "nodes_to_show")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -268,8 +270,7 @@ is_using_hotbar = false
 nodes_to_show = [NodePath("CogitoTabMenu/Inventory/PlayerCurrencies"), NodePath("CogitoTabMenu")]
 metadata/_edit_lock_ = true
 
-[node name="CogitoTabMenu" type="TabContainer" parent="InventoryInterface" node_paths=PackedStringArray("nodes_to_focus", "inventory_interface_reference")]
-visible = false
+[node name="CogitoTabMenu" type="TabContainer" parent="InventoryInterface" unique_id=1563851352 node_paths=PackedStringArray("nodes_to_focus", "inventory_interface_reference")]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 1
 offset_left = 25.0
@@ -283,15 +284,15 @@ nodes_to_focus = [NodePath("Inventory/InventoryUI"), NodePath("Quests/QuestDispl
 inventory_interface_reference = NodePath("..")
 metadata/_custom_type_script = "uid://c656a651xkd0c"
 
-[node name="Inventory" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu"]
+[node name="Inventory" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu" unique_id=1025157133]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="InventoryUI" parent="InventoryInterface/CogitoTabMenu/Inventory" instance=ExtResource("3_krf2d")]
+[node name="InventoryUI" parent="InventoryInterface/CogitoTabMenu/Inventory" unique_id=4191717 instance=ExtResource("3_krf2d")]
 layout_mode = 2
 inventory_name = "Player Inventory"
 
-[node name="PlayerCurrencies" type="PanelContainer" parent="InventoryInterface/CogitoTabMenu/Inventory"]
+[node name="PlayerCurrencies" type="PanelContainer" parent="InventoryInterface/CogitoTabMenu/Inventory" unique_id=14498940]
 clip_contents = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
@@ -301,7 +302,7 @@ mouse_filter = 2
 theme = ExtResource("5_j6s1a")
 theme_type_variation = &"HUDPanel"
 
-[node name="MarginContainer" type="MarginContainer" parent="InventoryInterface/CogitoTabMenu/Inventory/PlayerCurrencies"]
+[node name="MarginContainer" type="MarginContainer" parent="InventoryInterface/CogitoTabMenu/Inventory/PlayerCurrencies" unique_id=59127163]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 4
@@ -309,11 +310,11 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Inventory/PlayerCurrencies/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Inventory/PlayerCurrencies/MarginContainer" unique_id=2134936895]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Quests" type="Control" parent="InventoryInterface/CogitoTabMenu" node_paths=PackedStringArray("player_hud")]
+[node name="Quests" type="Control" parent="InventoryInterface/CogitoTabMenu" unique_id=672443833 node_paths=PackedStringArray("player_hud")]
 visible = false
 layout_mode = 2
 theme = ExtResource("5_j6s1a")
@@ -324,7 +325,7 @@ player_hud = NodePath("../../..")
 metadata/_edit_use_anchors_ = true
 metadata/_tab_index = 1
 
-[node name="QuestDisplay" type="PanelContainer" parent="InventoryInterface/CogitoTabMenu/Quests"]
+[node name="QuestDisplay" type="PanelContainer" parent="InventoryInterface/CogitoTabMenu/Quests" unique_id=556056891]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 0
 offset_right = 400.0
@@ -332,10 +333,10 @@ offset_bottom = 166.0
 theme = ExtResource("5_j6s1a")
 theme_type_variation = &"HUDPanel"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay"]
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay" unique_id=580289995]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer"]
+[node name="Label" type="Label" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer" unique_id=920176612]
 layout_mode = 2
 theme = ExtResource("5_j6s1a")
 theme_type_variation = &"PromptLabel"
@@ -344,41 +345,41 @@ text = "Quests"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TabContainer" type="TabContainer" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer" unique_id=789651106]
 layout_mode = 2
 theme = ExtResource("5_j6s1a")
 current_tab = 0
 
-[node name="Active" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer/TabContainer"]
+[node name="Active" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer/TabContainer" unique_id=1085555527]
 layout_mode = 2
 theme = ExtResource("5_j6s1a")
 theme_override_constants/separation = 4
 metadata/_tab_index = 0
 
-[node name="QuestEntry" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer/TabContainer/Active" instance=ExtResource("16_qsjbq")]
+[node name="QuestEntry" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer/TabContainer/Active" unique_id=1927177518 instance=ExtResource("16_qsjbq")]
 layout_mode = 2
 
-[node name="QuestEntry2" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer/TabContainer/Active" instance=ExtResource("16_qsjbq")]
+[node name="QuestEntry2" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer/TabContainer/Active" unique_id=756361526 instance=ExtResource("16_qsjbq")]
 layout_mode = 2
 
-[node name="Completed" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer/TabContainer"]
+[node name="Completed" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer/TabContainer" unique_id=355256306]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Failed" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer/TabContainer"]
+[node name="Failed" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Quests/QuestDisplay/VBoxContainer/TabContainer" unique_id=1293670383]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="Stats" type="Control" parent="InventoryInterface/CogitoTabMenu"]
+[node name="Stats" type="Control" parent="InventoryInterface/CogitoTabMenu" unique_id=1690070633]
 visible = false
 layout_mode = 2
 theme = ExtResource("5_j6s1a")
 metadata/_edit_use_anchors_ = true
 metadata/_tab_index = 2
 
-[node name="QuestDisplay" type="PanelContainer" parent="InventoryInterface/CogitoTabMenu/Stats"]
+[node name="QuestDisplay" type="PanelContainer" parent="InventoryInterface/CogitoTabMenu/Stats" unique_id=1702034651]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 0
 offset_right = 400.0
@@ -386,10 +387,10 @@ offset_bottom = 166.0
 theme = ExtResource("5_j6s1a")
 theme_type_variation = &"HUDPanel"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay"]
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay" unique_id=1638660878]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay/VBoxContainer"]
+[node name="Label" type="Label" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay/VBoxContainer" unique_id=1662717598]
 layout_mode = 2
 theme = ExtResource("5_j6s1a")
 theme_type_variation = &"PromptLabel"
@@ -398,30 +399,30 @@ text = "Stats"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TabContainer" type="TabContainer" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay/VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay/VBoxContainer" unique_id=933449729]
 layout_mode = 2
 theme = ExtResource("5_j6s1a")
 current_tab = 0
 
-[node name="Attributes" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay/VBoxContainer/TabContainer"]
+[node name="Attributes" type="VBoxContainer" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay/VBoxContainer/TabContainer" unique_id=576119935]
 layout_mode = 2
 theme = ExtResource("5_j6s1a")
 theme_override_constants/separation = 4
 metadata/_tab_index = 0
 
-[node name="UiAttributeDisplay" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay/VBoxContainer/TabContainer/Attributes" instance=ExtResource("20_3jei3")]
+[node name="UiAttributeDisplay" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay/VBoxContainer/TabContainer/Attributes" unique_id=667104026 instance=ExtResource("20_3jei3")]
 layout_mode = 2
 bar_stylebox = SubResource("StyleBoxFlat_3jei3")
 
-[node name="UiAttributeDisplay2" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay/VBoxContainer/TabContainer/Attributes" instance=ExtResource("20_3jei3")]
+[node name="UiAttributeDisplay2" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay/VBoxContainer/TabContainer/Attributes" unique_id=158548236 instance=ExtResource("20_3jei3")]
 layout_mode = 2
 bar_stylebox = SubResource("StyleBoxFlat_eu3l5")
 
-[node name="UiAttributeDisplay3" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay/VBoxContainer/TabContainer/Attributes" instance=ExtResource("20_3jei3")]
+[node name="UiAttributeDisplay3" parent="InventoryInterface/CogitoTabMenu/Stats/QuestDisplay/VBoxContainer/TabContainer/Attributes" unique_id=78638797 instance=ExtResource("20_3jei3")]
 layout_mode = 2
 bar_stylebox = SubResource("StyleBoxFlat_vmpwe")
 
-[node name="ExternalInventoryUI" parent="InventoryInterface" instance=ExtResource("3_krf2d")]
+[node name="ExternalInventoryUI" parent="InventoryInterface" unique_id=1481315967 instance=ExtResource("3_krf2d")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -436,7 +437,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GrabbedSlot" parent="InventoryInterface" instance=ExtResource("5_juyvt")]
+[node name="GrabbedSlot" parent="InventoryInterface" unique_id=1817763505 instance=ExtResource("5_juyvt")]
 visible = false
 modulate = Color(1, 1, 1, 0.498039)
 self_modulate = Color(1, 1, 1, 0.498039)
@@ -444,7 +445,7 @@ layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 
-[node name="HotBarInventory" parent="InventoryInterface" instance=ExtResource("6_8odro")]
+[node name="HotBarInventory" parent="InventoryInterface" unique_id=805852209 instance=ExtResource("6_8odro")]
 visible = false
 layout_mode = 1
 anchors_preset = 2
@@ -458,7 +459,7 @@ grow_vertical = 0
 theme = ExtResource("5_j6s1a")
 theme_type_variation = &"HUDPanel"
 
-[node name="InfoPanel" type="PanelContainer" parent="InventoryInterface"]
+[node name="InfoPanel" type="PanelContainer" parent="InventoryInterface" unique_id=1318765728]
 custom_minimum_size = Vector2(200, 10)
 layout_mode = 0
 offset_right = 200.0
@@ -467,7 +468,7 @@ mouse_filter = 2
 theme = ExtResource("5_j6s1a")
 theme_override_styles/panel = SubResource("StyleBoxFlat_eka6m")
 
-[node name="MarginContainer" type="MarginContainer" parent="InventoryInterface/InfoPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="InventoryInterface/InfoPanel" unique_id=453812423]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
@@ -476,18 +477,18 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InventoryInterface/InfoPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryInterface/InfoPanel/MarginContainer" unique_id=705470464]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
 
-[node name="ItemName" type="Label" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer"]
+[node name="ItemName" type="Label" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer" unique_id=480227941]
 layout_mode = 2
 theme = ExtResource("5_j6s1a")
 theme_type_variation = &"PromptLabel"
 text = "ItemName"
 
-[node name="ItemDescription" type="Label" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer"]
+[node name="ItemDescription" type="Label" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer" unique_id=1922588268]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -496,12 +497,12 @@ theme_override_font_sizes/font_size = 14
 text = "Item description going over to lines. Testing overflow as well to make sure the panel container extends as needed."
 autowrap_mode = 3
 
-[node name="HBoxUse" type="HBoxContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer"]
+[node name="HBoxUse" type="HBoxContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer" unique_id=1432844483]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxUse"]
+[node name="MarginContainer" type="MarginContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxUse" unique_id=9643700]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 15
@@ -509,21 +510,21 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="BtnUse" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxUse/MarginContainer" instance=ExtResource("12_jgxar")]
+[node name="BtnUse" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxUse/MarginContainer" unique_id=1873452088 instance=ExtResource("12_jgxar")]
 position = Vector2(15, 15)
 scale = Vector2(0.5, 0.5)
 action_name = "inventory_use_item"
 
-[node name="TextUse" type="Label" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxUse"]
+[node name="TextUse" type="Label" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxUse" unique_id=2114340517]
 layout_mode = 2
 text = "Use"
 
-[node name="HBoxMove" type="HBoxContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer"]
+[node name="HBoxMove" type="HBoxContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer" unique_id=996576901]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxMove"]
+[node name="MarginContainer" type="MarginContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxMove" unique_id=837323930]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 15
@@ -531,21 +532,21 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="BtnMove" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxMove/MarginContainer" instance=ExtResource("12_jgxar")]
+[node name="BtnMove" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxMove/MarginContainer" unique_id=2096725242 instance=ExtResource("12_jgxar")]
 position = Vector2(15, 15)
 scale = Vector2(0.5, 0.5)
 action_name = "inventory_move_item"
 
-[node name="TextMove" type="Label" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxMove"]
+[node name="TextMove" type="Label" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxMove" unique_id=942845930]
 layout_mode = 2
 text = "Move"
 
-[node name="HBoxDrop" type="HBoxContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer"]
+[node name="HBoxDrop" type="HBoxContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer" unique_id=1941161572]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxDrop"]
+[node name="MarginContainer" type="MarginContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxDrop" unique_id=1034536824]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 15
@@ -553,21 +554,21 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="BtnDrop" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxDrop/MarginContainer" instance=ExtResource("12_jgxar")]
+[node name="BtnDrop" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxDrop/MarginContainer" unique_id=2024751720 instance=ExtResource("12_jgxar")]
 position = Vector2(15, 15)
 scale = Vector2(0.5, 0.5)
 action_name = "inventory_drop_item"
 
-[node name="TextDrop" type="Label" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxDrop"]
+[node name="TextDrop" type="Label" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxDrop" unique_id=298032573]
 layout_mode = 2
 text = "Drop"
 
-[node name="HBoxAssign" type="HBoxContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer"]
+[node name="HBoxAssign" type="HBoxContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer" unique_id=1933810236]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxAssign"]
+[node name="MarginContainer" type="MarginContainer" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxAssign" unique_id=782793314]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 15
@@ -575,16 +576,17 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="BtnDrop" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxAssign/MarginContainer" instance=ExtResource("12_jgxar")]
+[node name="BtnDrop" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxAssign/MarginContainer" unique_id=1826330925 instance=ExtResource("12_jgxar")]
 position = Vector2(15, 15)
 scale = Vector2(0.5, 0.5)
 action_name = "inventory_assign_item"
 
-[node name="TextAssign" type="Label" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxAssign"]
+[node name="TextAssign" type="Label" parent="InventoryInterface/InfoPanel/MarginContainer/VBoxContainer/HBoxAssign" unique_id=227248604]
 layout_mode = 2
 text = "Assign Quickslot"
 
-[node name="QuickSlots" type="Control" parent="InventoryInterface" node_paths=PackedStringArray("quickslot_containers")]
+[node name="QuickSlots" type="Control" parent="InventoryInterface" unique_id=32894279 node_paths=PackedStringArray("quickslot_containers")]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -597,7 +599,7 @@ grow_vertical = 0
 script = ExtResource("20_xe82q")
 quickslot_containers = [NodePath("CogitoQuickslotContainer1"), NodePath("CogitoQuickslotContainer2"), NodePath("CogitoQuickslotContainer3"), NodePath("CogitoQuickslotContainer4")]
 
-[node name="CogitoQuickslotContainer1" parent="InventoryInterface/QuickSlots" instance=ExtResource("21_q2hxa")]
+[node name="CogitoQuickslotContainer1" parent="InventoryInterface/QuickSlots" unique_id=676308842 instance=ExtResource("21_q2hxa")]
 layout_mode = 0
 offset_top = -16.0
 offset_bottom = 48.0
@@ -610,7 +612,7 @@ focus_mode = 2
 [node name="DynamicInputIcon" parent="InventoryInterface/QuickSlots/CogitoQuickslotContainer1/MarginContainerInputIcon" index="0"]
 position = Vector2(59, 32)
 
-[node name="CogitoQuickslotContainer2" parent="InventoryInterface/QuickSlots" instance=ExtResource("21_q2hxa")]
+[node name="CogitoQuickslotContainer2" parent="InventoryInterface/QuickSlots" unique_id=1882580472 instance=ExtResource("21_q2hxa")]
 layout_mode = 0
 offset_left = 50.0
 offset_top = -68.0
@@ -623,7 +625,7 @@ focus_neighbor_bottom = NodePath("../CogitoQuickslotContainer4")
 focus_mode = 2
 input_action = "quickslot_2"
 
-[node name="CogitoQuickslotContainer3" parent="InventoryInterface/QuickSlots" instance=ExtResource("21_q2hxa")]
+[node name="CogitoQuickslotContainer3" parent="InventoryInterface/QuickSlots" unique_id=1981565134 instance=ExtResource("21_q2hxa")]
 layout_mode = 0
 offset_left = 100.0
 offset_top = -16.0
@@ -639,7 +641,7 @@ input_action = "quickslot_3"
 [node name="DynamicInputIcon" parent="InventoryInterface/QuickSlots/CogitoQuickslotContainer3/MarginContainerInputIcon" index="0"]
 position = Vector2(0, 32)
 
-[node name="CogitoQuickslotContainer4" parent="InventoryInterface/QuickSlots" instance=ExtResource("21_q2hxa")]
+[node name="CogitoQuickslotContainer4" parent="InventoryInterface/QuickSlots" unique_id=1734009687 instance=ExtResource("21_q2hxa")]
 layout_mode = 0
 offset_left = 50.0
 offset_top = 37.0
@@ -655,11 +657,11 @@ input_action = "quickslot_4"
 [node name="DynamicInputIcon" parent="InventoryInterface/QuickSlots/CogitoQuickslotContainer4/MarginContainerInputIcon" index="0"]
 position = Vector2(32, 0)
 
-[node name="DeathScreen" parent="." instance=ExtResource("23_4avie")]
+[node name="DeathScreen" parent="." unique_id=861819540 instance=ExtResource("23_4avie")]
 visible = false
 layout_mode = 1
 
-[node name="HintArea" type="VBoxContainer" parent="."]
+[node name="HintArea" type="VBoxContainer" parent="." unique_id=31974710]
 layout_mode = 1
 offset_bottom = 5.0
 theme = ExtResource("5_j6s1a")

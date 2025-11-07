@@ -48,38 +48,38 @@ size = Vector3(20, 1, 20)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_cb835"]
 
-[node name="Node3D" type="Node3D" unique_id=1109070368]
+[node name="Node3D" type="Node3D" unique_id=1135657613]
 
-[node name="WebFixes" type="Node" parent="." unique_id=1787291697]
+[node name="WebFixes" type="Node" parent="." unique_id=506068295]
 script = ExtResource("6_webfixes")
 
-[node name="PBROverrides" type="Node" parent="." unique_id=90244378]
+[node name="PBROverrides" type="Node" parent="." unique_id=1954496269]
 script = ExtResource("5_overrides")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=359016933]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=298800828]
 environment = SubResource("Environment_6a4tb")
 
-[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1862811159]
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1819032000]
 transform = Transform3D(0.81915206, 0.24240388, -0.5198368, 0, 0.90630776, 0.42261827, 0.57357645, -0.34618863, 0.74240386, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CogitoPlayer" parent="." unique_id=795623097 instance=ExtResource("1_cb835")]
+[node name="CogitoPlayer" parent="." unique_id=409955909 instance=ExtResource("1_cb835")]
 transform = Transform3D(-0.8515439, 0, 0.5242832, 0, 1, 0, -0.5242831, 0, -0.851544, 2.1364222, 1.6095476, -5.354737)
 
-[node name="Platform" type="StaticBody3D" parent="." unique_id=1463742554]
+[node name="Platform" type="StaticBody3D" parent="." unique_id=1986980301]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform" unique_id=1209202460]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform" unique_id=775150919]
 mesh = SubResource("PlaneMesh_50or8")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform" unique_id=1301817826]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform" unique_id=341053847]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_platform")
 
-[node name="WorldBoundary" type="StaticBody3D" parent="." unique_id=853473366]
+[node name="WorldBoundary" type="StaticBody3D" parent="." unique_id=464073490]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBoundary" unique_id=603383913]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBoundary" unique_id=265556618]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0)
 shape = SubResource("WorldBoundaryShape3D_cb835")
 
-[node name="barrels2" parent="." unique_id=198465897 instance=ExtResource("2_skxnn")]
+[node name="barrels2" parent="." unique_id=626887131 instance=ExtResource("2_skxnn")]
 transform = Transform3D(0.43062133, 0, 0.9025327, 0, 1, 0, -0.9025327, 0, 0.43062133, 0, 0, 0)
