@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="COGITO : Immersive Sim Template"
+config/name="Brújula"
 run/main_scene="uid://s8jh8lepju8r"
 config/features=PackedStringArray("4.5", "Forward Plus")
 run/max_fps=120

@@ -9,7 +9,6 @@ export.cfg
 
 # Mono-specific ignores
 .mono/
-.godot/
 data_*/
 
 # UID files (Godot 4.4+ generates these automatically)
