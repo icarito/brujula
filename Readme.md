@@ -1,67 +1,80 @@
+# Base de juego en Godot 4 (sobre plantilla COGITO)
+
+Este repositorio es una base jugable para simulaciones inmersivas en primera persona (FPS) construida sobre la plantilla COGITO para Godot 4. Úsalo como punto de partida para tus propios proyectos: ejecuta, explora y extiende.
+
+Recomendación: evita editar `addons/cogito/` u otros plugins para facilitar futuras actualizaciones; coloca tu código en `res://scenes/scripts/` y tus escenas en `res://scenes/`.
+- Usa los singletons existentes: `CogitoSceneManager`, `CogitoGlobals`, `CogitoQuestManager`, `Audio`, `InputHelper`.
+
+## Empezar rápido
+
+1. Instala Godot 4.x 
+2. Abre este proyecto desde Godot y ejecuta con F5.
+3. Activa los plugins (si no lo están):
+   - Cogito, Quick Audio, Input Helper, Godot Aerodynamic Physics (Proyecto > Plugins).
+4. Escena de entrada: definida por UID en `project.godot` (normalmente `addons/cogito/DemoScenes/COGITO_0_MainMenu.tscn`).
+5. Input Map: si faltan acciones, abre `addons/cogito/CogitoSettings.tres` y pulsa “Reset Project Input Map”, luego reinicia Godot.
+
+## Cómo explorar y hacer cambios
+
+- Escenas propias: `res://scenes/`.
+- Scripts propios: `res://scenes/scripts/`.
+- UI/Temas: `res://ui/`.
+- Recursos (ítems, misiones, etc.): `res://resources/`.
+- Extensión:
+  - Hereda escenas desde `addons/cogito/PackedScenes/*` y guarda fuera del addon.
+  - Añade componentes desde `addons/cogito/Components/*` como hijos en tus escenas.
+  - Hereda scripts (`extends CogitoWieldable`, `extends CogitoInventory`, etc.).
+- Persistencia: usa los grupos `Persist` (re-instancia) o `save_object_state` (solo estado) e implementa `save()`/`set_state()` cuando corresponda.
+
+## Subsistemas disponibles (resumen)
+
+- Inventario flexible basado en Resources y UI desacoplada.
+- Gestión de escenas, fade, guardado/carga y slots con `CogitoSceneManager`.
+- Misiones (QuestSystem) con persistencia.
+- Interacciones y objetos empuñables (Wieldables).
+- Pisadas dinámicas por superficie (DynamicFootstepSystem).
+- Audio simple 2D/3D via `Audio` (Quick Audio).
+- Ayudantes de entrada con `InputHelper`.
+- NPC/Enemigos básicos con NavigationAgent y estados por componentes.
+- Menú principal/pausa/opciones listos para usar.
+
+## Exportación web
+
+- Preset “Web” escribe en `build/index.html` (ver `export_presets.cfg`).
+
+## Herramientas de desarrollo
+
+- Integración opcional de asistente de IA: `tools/godot-mcp/` (ver `tools/godot-mcp/README.md`).
+
+---
+
+## Acerca de COGITO (resumen)
+
 ![COGITO_banner](addons/cogito/COGITO_banner.jpg)
-# COGITO
-[![GodotEngine](https://img.shields.io/badge/Godot_4.4_stable-blue?logo=godotengine&logoColor=white)](https://godotengine.org/) [![COGITO](https://img.shields.io/badge/version_1.1.2-35A1D7?label=COGITO&labelColor=0E887A)](https://github.com/Phazorknight/Cogito)
 
-## What is it?
-Cogito is a First Person Immersive Sim Template Project for Godot 4, providing a framework for creating interactable objects, various items to use and mechanics to influence the player and game environment.
-In short, with COGITO you get a quick start for a fully-featured first person game with a great variety of mechanics and a solid base to create your own.
+[![GodotEngine](https://img.shields.io/badge/Godot_4.x-blue?logo=godotengine&logoColor=white)](https://godotengine.org/) [![COGITO](https://img.shields.io/badge/version_1.1.x-35A1D7?label=COGITO&labelColor=0E887A)](https://github.com/Phazorknight/Cogito)
 
-### [Online documentation](https://cogito.readthedocs.io/en/latest/index.html)
-### [Video tutorial series](https://cogito.readthedocs.io/en/latest/tutorials.html)
-### [Cogito in the Godot Asset Store (beta)](https://store-beta.godotengine.org/asset/philip-drobar/cogito)
+COGITO es una plantilla de simulación inmersiva para Godot 4 que ofrece un punto de partida completo para juegos FPS: controlador de jugador, objetos interactivos (puertas, cajones, ítems), inventario, misiones, menús, guardado/carga y ejemplos listos.
 
-### Current Features
-- First person player controller with:
-  - Sprinting, jumping, crouching, sliding, stairs handling, ladder handling, sitting
-  - Lots of exposed properties to tweak to your liking (speeds, headbob, fall damage, bunnyhop, etc.)
-  - Easy-to-use dynamic footstep sound system
-- Player Attribute System
-  - Health, Stamina, Visibility for stealth, etc
-  - Customize how attributes get displayed in the HUD (or stay hidden)
-  - Also useable for RPG-like attributes (Strength, Wisdom, etc)
-  - Interactions can check attributes (eg. you can only lift a box if you're strong enough)
-- Interaction System
-  - Component-based interactions makes it easy to turn your own objects interactive quickly and customize existing ones
-  - Examples for interactive objects like doors, drawers, boxes to carry, turn-wheels, elevators, notes, keypads
-- Inventory System
-  - Flexible resource-based inventories
-  - Grid-based (think Resident Evil 4)
-  - Inventory UI separate from inventory logic
-  - Examples for multiple item types (consumables, keys, ammo, weapons, combinable Items)
-  - Base class to easily add your custom item types
-  - Containers with their own inventories
-- Basic NPC
-  - NavigationAgent based enemy with component-based state machine + animation states
-  - Simple player detection system that uses detection areas + basic line-of-sight checks
-- Main menu, pause menu and Options menu
-- Rebindable controls
-- Full game pad support!
-- Save and Load System as well as scene persistency
-- Support for other plugins:
-  - Works with Dialogic
-  - Works with Dialgue Manager
-- Work in progress:
-  - Systemic Properties (wet/dry, flammable/on fire, soft, etc) (very WIP)
-  - Basic Quest System
+- Documentación: https://cogito.readthedocs.io/en/latest/
+- Tutoriales en video: https://cogito.readthedocs.io/en/latest/tutorials.html
+- Asset store (beta): https://store-beta.godotengine.org/asset/philip-drobar/cogito
 
-### Comes with fully featured Demo Scenes
-- Set up like a game level including a variety of objects, weapons and quests
-- Demo scenes contains hints that explain how objects in the scene were set up
+Características destacadas (breve):
+- Controlador en primera persona (correr/saltar/agacharse/deslizamiento/escaleras/sentarse) con pisadas dinámicas.
+- Inventario por Resources, UI separada y contenedores.
+- Interacciones con verificación de atributos y varios objetos de ejemplo.
+- NPC básico con NavigationAgent y máquina de estados por componentes.
+- Menú principal/pausa/opciones, sistema de misiones y guardado/carga con persistencia por escena.
 
-COGITO is made by [Philip Drobar](https://www.philipdrobar.com) with help from [these contributors](https://github.com/Phazorknight/Cogito/graphs/contributors).
+> Importante: COGITO v1.1 es software de código abierto mantenido por la comunidad y puede contener errores. Úsalo bajo tu propio riesgo y revisa Issues/Discussions.
 
-## Principles of this template
-The structure of this template always tries to adhere to the following principles:
-- **Complete**: When you download COGITO and press play, you get a functioning project out of the box. Game menu, save slot select, options and a playable level are all included.
-- **Versatile**: Whether your game is set in the future, the past or the present, use melee, projectile or no weapons at all, have low poly, stylized or realistic graphics, the template will have features for you.
-- **Modular**: Do not want to use a feature? You will be able to hide it, ignore it or strip it out without breaking COGITO. At the same time, COGITO is designed to be extendable with your own custom features or other add-ons.
-- **Approachable**: While there will always be a learning curve, we strive to make COGTIO approachable and intuitive to use, so it doesn't get in your way of making your game.
+- Atribución, Contribuyentes y Licencia: https://cogito.readthedocs.io/en/latest/about.html
+- Autor de COGITO: Philip Drobar (Phazorknight).
 
-> [!IMPORTANT]  
-> COGITO v1.1 is not 100% bug-free. While most features are set, be aware that this is hobbyist open source software. Use at your own risk and check Issues and Discussion pages for more information.
+---
 
-[Credits, Contributors and License](https://cogito.readthedocs.io/en/latest/about.html)
+## Notas
 
-## Development Tools
-
-This project includes [Godot MCP](https://github.com/Coding-Solo/godot-mcp) in `tools/godot-mcp/` for AI assistant integration. See `tools/godot-mcp/README.md` for setup instructions.
+- Prefijos o rutas de guardado se ajustan desde `addons/cogito/CogitoSettings.tres`.
+- Los slots de guardado usan `user://<slot>/...` y el autoguardado se define en `CogitoSettings.tres`.
