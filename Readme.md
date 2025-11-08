@@ -17,9 +17,7 @@ Recomendación: evita editar `addons/cogito/` u otros plugins para facilitar fut
 ## Cómo explorar y hacer cambios
 
 - Escenas propias: `res://scenes/`.
-- Scripts propios: `res://scenes/scripts/`.
-- UI/Temas: `res://ui/`.
-- Recursos (ítems, misiones, etc.): `res://resources/`.
+- Scripts propios: `res://scenes/scripts/` (utilitarios en `scenes/scripts/system/`).
 - Extensión:
   - Hereda escenas desde `addons/cogito/PackedScenes/*` y guarda fuera del addon.
   - Añade componentes desde `addons/cogito/Components/*` como hijos en tus escenas.
