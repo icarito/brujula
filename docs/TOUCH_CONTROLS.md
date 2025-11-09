@@ -14,9 +14,12 @@ This project includes touch controls for mobile and tablet devices using the Vir
 
 ## Visibility
 
-The touch controls automatically show when a finger touches the screen and hide when all fingers are lifted. This makes them less intrusive and more discoverable. The controls are only enabled on touchscreen devices and completely disabled on desktop.
+The touch controls use the Virtual Joystick addon's built-in "WHEN_TOUCHED" visibility mode, which means:
+- Joysticks automatically appear when you touch their area
+- They fade away when released
+- This behavior is handled entirely by the addon for consistency
 
-When touch controls are active, the crosshair is enlarged by 50% for better visibility on mobile devices.
+The controls are only enabled on touchscreen devices and completely disabled on desktop. When active, the crosshair is permanently enlarged by 50% for better visibility on mobile devices.
 
 ## How to Add Touch Controls to a Scene
 
@@ -43,23 +46,26 @@ You can adjust the camera sensitivity by modifying the `camera_sensitivity` expo
 
 ### How It Works
 
+### How It Works
+
 - The left joystick uses input actions (`forward`, `back`, `left`, `right`) that are already configured in the project
 - The right joystick directly manipulates the player's neck and head nodes for camera rotation
 - Action buttons use `TouchScreenButton` nodes that emit standard input actions
-- Controls appear on first touch and hide when all fingers are lifted
-- Crosshair enlarges by 50% when touch controls are active
-- Joysticks are 50% larger and 25% transparent for better visibility without obstructing the view
+- Joysticks use the addon's "WHEN_TOUCHED" visibility mode for automatic show/hide
+- Crosshair is permanently enlarged by 50% on touchscreen devices for better targeting
+- Controls are 50% transparent and properly anchored to bottom corners
 
 ### Performance Optimizations
 
 The following optimizations have been implemented for better mobile performance:
 
 1. **Touch Controls**:
-   - Processing only occurs when controls are visible and active
-   - Touch tracking uses minimal overhead
+   - Simplified visibility using addon's built-in "WHEN_TOUCHED" mode
+   - Minimal processing overhead
    - Controls completely disabled on non-touchscreen devices
 
 2. **Rendering** (in `project.godot`):
+   - **Render scale set to 0.65** for better mobile performance
    - VRAM compression enabled for mobile (ETC2/ASTC)
    - GPU pixel snap enabled for 2D elements
    - Optimized texture settings
@@ -72,6 +78,9 @@ The following settings have been configured in `project.godot`:
 [input_devices]
 pointing/emulate_touch_from_mouse=true
 pointing/emulate_mouse_from_touch=false
+
+[display]
+window/stretch/scale=0.65  # Render resolution for mobile performance
 
 [rendering]
 textures/vram_compression/import_etc2_astc=true
