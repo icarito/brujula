@@ -14,7 +14,9 @@ This project includes touch controls for mobile and tablet devices using the Vir
 
 ## Visibility
 
-The touch controls are automatically shown only on devices with touchscreens and hidden on desktop. For desktop testing, the controls can be used with mouse input thanks to the `emulate_touch_from_mouse` setting.
+The touch controls automatically show when a finger touches the screen and hide when all fingers are lifted. This makes them less intrusive and more discoverable. The controls are only enabled on touchscreen devices and completely disabled on desktop.
+
+When touch controls are active, the crosshair is enlarged by 50% for better visibility on mobile devices.
 
 ## How to Add Touch Controls to a Scene
 
@@ -44,7 +46,23 @@ You can adjust the camera sensitivity by modifying the `camera_sensitivity` expo
 - The left joystick uses input actions (`forward`, `back`, `left`, `right`) that are already configured in the project
 - The right joystick directly manipulates the player's neck and head nodes for camera rotation
 - Action buttons use `TouchScreenButton` nodes that emit standard input actions
-- All controls automatically show/hide based on `DisplayServer.is_touchscreen_available()`
+- Controls appear on first touch and hide when all fingers are lifted
+- Crosshair enlarges by 50% when touch controls are active
+- Joysticks are 50% larger and 25% transparent for better visibility without obstructing the view
+
+### Performance Optimizations
+
+The following optimizations have been implemented for better mobile performance:
+
+1. **Touch Controls**:
+   - Processing only occurs when controls are visible and active
+   - Touch tracking uses minimal overhead
+   - Controls completely disabled on non-touchscreen devices
+
+2. **Rendering** (in `project.godot`):
+   - VRAM compression enabled for mobile (ETC2/ASTC)
+   - GPU pixel snap enabled for 2D elements
+   - Optimized texture settings
 
 ## Project Settings
 
@@ -54,6 +72,10 @@ The following settings have been configured in `project.godot`:
 [input_devices]
 pointing/emulate_touch_from_mouse=true
 pointing/emulate_mouse_from_touch=false
+
+[rendering]
+textures/vram_compression/import_etc2_astc=true
+2d/options/use_gpu_pixel_snap=true
 ```
 
 These settings are required by the Virtual Joystick addon and enable testing with mouse input on desktop.
