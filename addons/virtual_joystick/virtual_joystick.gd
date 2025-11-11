@@ -68,9 +68,12 @@ var _touch_index : int = -1
 
 @onready var _default_color : Color = _tip.modulate
 
+var mobile_input_fix = null
+
 # FUNCTIONS
 
 func _ready() -> void:
+	mobile_input_fix = MobileInputFix # Directly reference the autoloaded singleton
 	if ProjectSettings.get_setting("input_devices/pointing/emulate_mouse_from_touch"):
 		printerr("The Project Setting 'emulate_mouse_from_touch' should be set to False")
 	if not ProjectSettings.get_setting("input_devices/pointing/emulate_touch_from_mouse"):
@@ -160,6 +163,8 @@ func _reset():
 				Input.action_release(action)
 
 func _input(event: InputEvent) -> void:
+	if mobile_input_fix and mobile_input_fix.current_mode == mobile_input_fix.InputMode.MOUSE:
+		return
 	
 	# Ignorar mouse y eventos sintéticos index==0 y posición (0,0) o centro de pantalla
 	if event is InputEventMouse:

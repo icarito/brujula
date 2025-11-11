@@ -430,10 +430,34 @@ func _release_mouse_for_tab_menu():
 		Input.set_custom_mouse_cursor(null, Input.CURSOR_ARROW)
 
 
+
+var _last_filtered_mouse_motion_frame := -1
+
 func _input(event):
+	print("[cogito_player] _input recibido: %s | self: %s | name: %s" % [event, str(self), name])
+	# FILTRO ABSOLUTO: Solo aquí, al inicio, y return inmediato
+	var mobile_input_fix = null
+	var is_touch_mode = false
+	if has_node("/root/MobileInputFix"):
+		mobile_input_fix = get_node("/root/MobileInputFix")
+		if "current_mode" in mobile_input_fix:
+			is_touch_mode = mobile_input_fix.current_mode == mobile_input_fix.InputMode.TOUCH
+	var is_web = OS.has_feature("web")
+	if is_web and event is InputEventMouseMotion and (is_touch_mode or (mobile_input_fix and "mouse_motion_blocked_web" in mobile_input_fix and mobile_input_fix.mouse_motion_blocked_web)):
+		return
+		print("[cogito_player] FILTRO ABSOLUTO: Ignorando InputEventMouseMotion por modo TOUCH o filtro web")
+		get_viewport().set_input_as_handled()
+		return
+
 	if is_movement_paused and (event is InputEventMouseMotion or event is InputEventMouseButton):
 		get_viewport().set_input_as_handled()
 		return
+
+	# Ignorar todos los eventos de mouse button si el modo es touch o si el filtro global bloquea mouse motion en web
+	if (is_touch_mode or (mobile_input_fix and "mouse_motion_blocked_web" in mobile_input_fix and mobile_input_fix.mouse_motion_blocked_web)) and event is InputEventMouseButton:
+		print("[cogito_player] Ignorado evento de mouse button por modo touch o filtro web activo: %s" % event)
+		return
+
 	if event is InputEventMouseMotion and !is_movement_paused:
 		# Ignorar SIEMPRE el primer mouse motion tras warp_mouse/capture (y smoothing)
 		if ignore_next_mouse_motion or ignore_mouse_motion_frames > 0:
@@ -443,6 +467,7 @@ func _input(event):
 			ignore_next_mouse_motion = true
 			ignore_mouse_motion_frames = 2
 			return
+		print("[cogito_player][ADVERTENCIA] Se va a procesar movimiento de cámara por InputEventMouseMotion (esto NO debería ocurrir en modo touch/filtro web)")
 		var look_movement: Vector2 = Vector2(0.0,0.0)
 		#If players sitting & look marker is present, use sittable look handling
 		if is_sitting and CogitoSceneManager._current_sittable_node.look_marker_node:
@@ -452,8 +477,8 @@ func _input(event):
 			look_movement.x = -event.relative.x
 			look_movement.y = -event.relative.y if INVERT_Y_AXIS else event.relative.y
 		mouse_movement.emit(look_movement)
+		return
 
-		
 	# Checking Analog stick input for mouse look
 	if event is InputEventJoypadMotion and !is_movement_paused:
 		if event.get_axis() == 2:

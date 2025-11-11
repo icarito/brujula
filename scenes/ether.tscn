@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://s8jh8lepju8r"]
+[gd_scene load_steps=30 format=3 uid="uid://s8jh8lepju8r"]
 
 [ext_resource type="Texture2D" uid="uid://nxl0y8bc2g61" path="res://assets/Panorama_Ocean_02-2048x1024.png" id="1_1d02l"]
 [ext_resource type="PackedScene" uid="uid://kicjwmh02uwf" path="res://addons/cogito/PackedScenes/cogito_player.tscn" id="1_cb835"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dmeh01c5ccjqc" path="res://addons/cogito/CogitoObjects/cogito_object.gd" id="9_cogobj"]
 [ext_resource type="Script" uid="uid://yy1luaivs5h0" path="res://scenes/scripts/note_shader_controller.gd" id="10_note_fx"]
 [ext_resource type="Script" uid="uid://jqdieiesn8i3" path="res://scenes/scripts/note_glow_follow.gd" id="11_glow_follow"]
+[ext_resource type="ArrayOccluder3D" uid="uid://bv3botakk16te" path="res://scenes/ether.occ" id="13_7sg4r"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_skxnn"]
 panorama = ExtResource("1_1d02l")
@@ -141,44 +142,44 @@ height = 0.02
 radial_segments = 8
 rings = 4
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=270416921]
 
-[node name="WebFixes" type="Node" parent="."]
+[node name="WebFixes" type="Node" parent="." unique_id=2024927202]
 script = ExtResource("6_webfixes")
 
-[node name="PBROverrides" type="Node" parent="."]
+[node name="PBROverrides" type="Node" parent="." unique_id=1949914597]
 script = ExtResource("5_overrides")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1167515110]
 environment = SubResource("Environment_6a4tb")
 
-[node name="Sun" type="DirectionalLight3D" parent="."]
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=2106343156]
 transform = Transform3D(0.81915206, 0.24240388, -0.5198368, 0, 0.90630776, 0.42261827, 0.57357645, -0.34618863, 0.74240386, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CogitoPlayer" parent="." instance=ExtResource("1_cb835")]
+[node name="CogitoPlayer" parent="." unique_id=9716307 instance=ExtResource("1_cb835")]
 transform = Transform3D(-0.8515439, 0, 0.5242832, 0, 1, 0, -0.5242831, 0, -0.851544, 2.1364222, 1.6095476, -5.354737)
 
-[node name="Platform" type="StaticBody3D" parent="."]
+[node name="Platform" type="StaticBody3D" parent="." unique_id=1386024328]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform" unique_id=892533065]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("BoxMesh_platform")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform" unique_id=1276519980]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 shape = SubResource("BoxShape3D_platform")
 
-[node name="WorldBoundary" type="StaticBody3D" parent="."]
+[node name="WorldBoundary" type="StaticBody3D" parent="." unique_id=224189847]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBoundary"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBoundary" unique_id=1758335070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0)
 shape = SubResource("WorldBoundaryShape3D_cb835")
 
-[node name="barrels2" parent="." instance=ExtResource("2_skxnn")]
+[node name="barrels2" parent="." unique_id=1028635351 instance=ExtResource("2_skxnn")]
 transform = Transform3D(0.43062133, 0, 0.9025327, 0, 1, 0, -0.9025327, 0, 0.43062133, 0, 0, 0)
 
-[node name="Nota" type="RigidBody3D" parent="."]
+[node name="Nota" type="RigidBody3D" parent="." unique_id=546972612]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.27, -4)
 mass = 0.2
 continuous_cd = true
@@ -186,14 +187,14 @@ script = ExtResource("9_cogobj")
 cogito_name = "Nota"
 display_name = "Nota"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Nota"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Nota" unique_id=989369762]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0)
 mesh = SubResource("PlaneMesh_note")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Nota"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Nota" unique_id=1982780178]
 shape = SubResource("BoxShape3D_note")
 
-[node name="ReadableComponent" parent="Nota" instance=ExtResource("8_readable")]
+[node name="ReadableComponent" parent="Nota" unique_id=114621733 instance=ExtResource("8_readable")]
 readable_title = "Nota"
 readable_content = "Querida hija:
 
@@ -205,16 +206,16 @@ O sea, ¡no tenemos límites!
          - Tu papi que te adora  <3"
 interaction_text = "Leer"
 
-[node name="CarryableComponent" parent="Nota" instance=ExtResource("7_carry")]
+[node name="CarryableComponent" parent="Nota" unique_id=1727070186 instance=ExtResource("7_carry")]
 carry_distance_offset = -0.5
 carrying_velocity_multiplier = 14
 drop_distance = 2.0
 interaction_text = "Cargar Nota"
 
-[node name="NoteFXController" type="Node" parent="Nota"]
+[node name="NoteFXController" type="Node" parent="Nota" unique_id=767347424]
 script = ExtResource("10_note_fx")
 
-[node name="NotaGlow" type="OmniLight3D" parent="Nota"]
+[node name="NotaGlow" type="OmniLight3D" parent="Nota" unique_id=551661356]
 light_color = Color(1, 0.92, 0.75, 1)
 light_energy = 0.5
 light_size = 0.08
@@ -224,7 +225,7 @@ script = ExtResource("11_glow_follow")
 target_path = NodePath("..")
 height = 0.35
 
-[node name="GlowParticles" type="GPUParticles3D" parent="Nota"]
+[node name="GlowParticles" type="GPUParticles3D" parent="Nota" unique_id=1688306248]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 amount = 30
 lifetime = 3.0
@@ -232,3 +233,6 @@ randomness = 0.5
 visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
 process_material = SubResource("ParticleProcessMaterial_glow")
 draw_pass_1 = SubResource("SphereMesh_particle")
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=334290906]
+occluder = ExtResource("13_7sg4r")

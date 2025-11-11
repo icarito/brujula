@@ -1,11 +1,22 @@
 extends Control
 
+
 # Para evitar salto de cámara al capturar mouse (ignorar eventos en el centro)
 var ignore_mouse_motion_center := false
 var mouse_motion_center: Vector2 = Vector2.ZERO
 # Para ignorar el siguiente InputEventMouseMotion sintético tras warp_mouse
 var ignore_next_mouse_motion := false
 var ignore_timer := 0.0
+
+
+
+# Para ignorar eventos de mouse tras un touch (Web: evita dobles eventos)
+var ignore_mouse_due_to_touch := false
+var _touch_mouse_ignore_timer : Timer = null
+const TOUCH_MOUSE_IGNORE_TIME := 0.3
+# Guardar la posición del último touch para filtrar mouse sintético
+var last_touch_pos : Vector2 = Vector2.ZERO
+const MOUSE_TOUCH_POSITION_THRESHOLD := 8.0 # píxeles
 
 func _on_input_mode_changed(mode):
 	if mobile_input_fix and mode == mobile_input_fix.InputMode.MOUSE:
@@ -16,15 +27,42 @@ func _on_ignore_next_mouse_motion():
 	ignore_next_mouse_motion = true
 	ignore_timer = 0.1  # Ignorar por 0.1 segundos máximo
 
+
 func _input(event):
-	# Solo imprimir eventos clave para evitar overflow
+	# Filtro avanzado: ignorar mouse si ocurre justo donde fue el último touch y en ventana de tiempo
+	if (event is InputEventMouseMotion or event is InputEventMouseButton) and ignore_mouse_due_to_touch:
+		var mouse_pos : Vector2 = event.position if event.has_method("position") else Vector2.ZERO
+		if last_touch_pos.distance_to(mouse_pos) <= MOUSE_TOUCH_POSITION_THRESHOLD:
+			return
 	if event is InputEventMouseMotion:
-		# Ignorar SIEMPRE el primer mouse motion tras warp_mouse/capture, sin importar posición ni relative
 		if ignore_next_mouse_motion:
 			ignore_next_mouse_motion = false
 			return
-	elif event is InputEventScreenTouch or event is InputEventScreenDrag or event is InputEventMouseButton:
-		pass # Si necesitas debug, descomenta los prints puntuales
+	elif event is InputEventScreenTouch:
+		if event.pressed:
+			# Si hay un nuevo touch, cancelar el temporizador y permitir input
+			ignore_mouse_due_to_touch = false
+			if _touch_mouse_ignore_timer:
+				_touch_mouse_ignore_timer.stop()
+			last_touch_pos = event.position
+		else:
+			# Al soltar touch, iniciar temporizador para ignorar mouse brevemente
+			if not _touch_mouse_ignore_timer:
+				_touch_mouse_ignore_timer = Timer.new()
+				_touch_mouse_ignore_timer.one_shot = true
+				_touch_mouse_ignore_timer.wait_time = TOUCH_MOUSE_IGNORE_TIME
+				_touch_mouse_ignore_timer.timeout.connect(_on_touch_mouse_ignore_timeout)
+				add_child(_touch_mouse_ignore_timer)
+			ignore_mouse_due_to_touch = true
+			last_touch_pos = event.position
+			_touch_mouse_ignore_timer.start(TOUCH_MOUSE_IGNORE_TIME)
+	elif event is InputEventScreenDrag:
+		pass
+	elif event is InputEventMouseButton:
+		pass
+
+func _on_touch_mouse_ignore_timeout():
+	ignore_mouse_due_to_touch = false
 ## Touch Controls Manager
 ## Manages virtual joysticks for mobile/tablet input
 
