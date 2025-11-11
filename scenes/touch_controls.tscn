@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqwn4s0wv2gfy"]
 
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="1_joystick"]
-[ext_resource type="Script" uid="uid://puet0jocdxsf" path="res://scenes/scripts/touch_controls.gd" id="2_script"]
+[ext_resource type="Script" uid="uid://c314nxwqgefhh" path="res://scenes/scripts/touch_controls.gd" id="2_script"]
 
 [node name="TouchControls" type="Control"]
 layout_mode = 3
