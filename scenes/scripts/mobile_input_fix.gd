@@ -65,7 +65,6 @@ func _ready() -> void:
 
 func _input(event):
 	var is_web = OS.has_feature("web")
-	# ...existing code...
 
 	if is_web:
 		# --- WEB: nunca capturar mouse automáticamente ---
@@ -147,6 +146,4 @@ func _input(event):
 			if initial_release:
 				initial_release = false
 		else:
-			# Solo para depuración: print si no se puede capturar
-			# print("[mobile_input_fix] No se puede capturar mouse: viewport o ventana no válida")
 			pass

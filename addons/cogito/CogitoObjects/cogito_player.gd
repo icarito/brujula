@@ -434,7 +434,6 @@ func _release_mouse_for_tab_menu():
 var _last_filtered_mouse_motion_frame := -1
 
 func _input(event):
-	print("[cogito_player] _input recibido: %s | self: %s | name: %s" % [event, str(self), name])
 	# FILTRO ABSOLUTO: Solo aquí, al inicio, y return inmediato
 	var mobile_input_fix = null
 	var is_touch_mode = false
@@ -445,7 +444,6 @@ func _input(event):
 	var is_web = OS.has_feature("web")
 	if is_web and event is InputEventMouseMotion and (is_touch_mode or (mobile_input_fix and "mouse_motion_blocked_web" in mobile_input_fix and mobile_input_fix.mouse_motion_blocked_web)):
 		return
-		print("[cogito_player] FILTRO ABSOLUTO: Ignorando InputEventMouseMotion por modo TOUCH o filtro web")
 		get_viewport().set_input_as_handled()
 		return
 
@@ -467,7 +465,6 @@ func _input(event):
 			ignore_next_mouse_motion = true
 			ignore_mouse_motion_frames = 2
 			return
-		print("[cogito_player][ADVERTENCIA] Se va a procesar movimiento de cámara por InputEventMouseMotion (esto NO debería ocurrir en modo touch/filtro web)")
 		var look_movement: Vector2 = Vector2(0.0,0.0)
 		#If players sitting & look marker is present, use sittable look handling
 		if is_sitting and CogitoSceneManager._current_sittable_node.look_marker_node:

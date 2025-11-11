@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="1_joystick"]
 [ext_resource type="Script" uid="uid://c314nxwqgefhh" path="res://scenes/scripts/touch_controls.gd" id="2_script"]
 
-[node name="TouchControls" type="Control"]
+[node name="TouchControls" type="Control" unique_id=63554289]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,54 +13,61 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_script")
 
-[node name="LeftJoystick" parent="." instance=ExtResource("1_joystick")]
+[node name="LeftJoystick" parent="." unique_id=10506827 instance=ExtResource("1_joystick")]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.5)
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_right = 0.0
-offset_top = -320.0
-offset_right = 320.0
-offset_bottom = 0.0
+	anchor_left = 0.0
+	anchor_right = 0.0
+	anchor_top = 1.0
+	anchor_bottom = 1.0
+	offset_left = 0.0
+	offset_top = -320.0
+	offset_right = 320.0
+	offset_bottom = 40.0
 visibility_mode = 2
 action_left = "left"
 action_right = "right"
 action_up = "forward"
 action_down = "back"
 
-[node name="RightJoystick" parent="." instance=ExtResource("1_joystick")]
+[node name="RightJoystick" parent="." unique_id=1531257896 instance=ExtResource("1_joystick")]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.5)
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-offset_left = -320.0
-offset_top = -320.0
-offset_right = 0.0
-offset_bottom = 0.0
+	anchor_left = 1.0
+	anchor_right = 1.0
+	anchor_top = 1.0
+	anchor_bottom = 1.0
+	offset_left = -320.0
+	offset_top = -320.0
+	offset_right = 0.0
+	offset_bottom = 40.0
 grow_horizontal = 0
 visibility_mode = 2
 
-[node name="ActionButtons" type="Control" parent="."]
+[node name="ActionButtons" type="Control" parent="." unique_id=1764641671]
 modulate = Color(1, 1, 1, 0.5)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+	anchor_left = 1.0
+	anchor_right = 1.0
+	anchor_top = 1.0
+	anchor_bottom = 1.0
+	offset_left = -400.0
+	offset_top = -400.0
+	offset_right = 0.0
+	offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="JumpButton" type="TouchScreenButton" parent="ActionButtons"]
+[node name="JumpButton" type="TouchScreenButton" parent="ActionButtons" unique_id=572813446]
 position = Vector2(1695, 110)
 scale = Vector2(3, 3)
 action = "jump"
 visibility_mode = 1
 
-[node name="Label" type="Label" parent="ActionButtons/JumpButton"]
+[node name="Label" type="Label" parent="ActionButtons/JumpButton" unique_id=1679868494]
 offset_left = -25.0
 offset_top = -25.0
 offset_right = 25.0
@@ -71,13 +78,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="InteractButton" type="TouchScreenButton" parent="ActionButtons"]
+[node name="InteractButton" type="TouchScreenButton" parent="ActionButtons" unique_id=1091343981]
 position = Vector2(1795, 210)
 scale = Vector2(3, 3)
 action = "interact"
 visibility_mode = 1
 
-[node name="Label" type="Label" parent="ActionButtons/InteractButton"]
+[node name="Label" type="Label" parent="ActionButtons/InteractButton" unique_id=302668908]
 offset_left = -25.0
 offset_top = -25.0
 offset_right = 25.0
@@ -88,13 +95,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="SprintButton" type="TouchScreenButton" parent="ActionButtons"]
+[node name="SprintButton" type="TouchScreenButton" parent="ActionButtons" unique_id=1797729870]
 position = Vector2(1595, 210)
 scale = Vector2(3, 3)
 action = "sprint"
 visibility_mode = 1
 
-[node name="Label" type="Label" parent="ActionButtons/SprintButton"]
+[node name="Label" type="Label" parent="ActionButtons/SprintButton" unique_id=750820410]
 offset_left = -25.0
 offset_top = -25.0
 offset_right = 25.0
@@ -105,13 +112,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="CrouchButton" type="TouchScreenButton" parent="ActionButtons"]
+[node name="CrouchButton" type="TouchScreenButton" parent="ActionButtons" unique_id=1708462569]
 position = Vector2(1695, 310)
 scale = Vector2(3, 3)
 action = "crouch"
 visibility_mode = 1
 
-[node name="Label" type="Label" parent="ActionButtons/CrouchButton"]
+[node name="Label" type="Label" parent="ActionButtons/CrouchButton" unique_id=222346232]
 offset_left = -25.0
 offset_top = -25.0
 offset_right = 25.0

@@ -19,11 +19,9 @@ func _ready() -> void:
 		var window_size = DisplayServer.window_get_size()
 		get_tree().root.size = window_size
 		
-		print("[Web] Viewport configured: ", window_size)
 		
 		# Capturar el cursor automáticamente al iniciar
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		print("[Web] Mouse captured automatically")
 		
 		# Escuchar cambios de tamaño de ventana para ajustar dinámicamente
 		get_tree().root.size_changed.connect(_on_window_resized)
@@ -32,7 +30,6 @@ func _on_window_resized() -> void:
 	if OS.has_feature("web"):
 		var new_size = DisplayServer.window_get_size()
 		get_tree().root.size = new_size
-		print("[Web] Window resized to: ", new_size)
 
 """
 func _on_focus_changed(_control) -> void:

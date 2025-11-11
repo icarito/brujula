@@ -74,10 +74,6 @@ var mobile_input_fix = null
 
 func _ready() -> void:
 	mobile_input_fix = MobileInputFix # Directly reference the autoloaded singleton
-	if ProjectSettings.get_setting("input_devices/pointing/emulate_mouse_from_touch"):
-		printerr("The Project Setting 'emulate_mouse_from_touch' should be set to False")
-	if not ProjectSettings.get_setting("input_devices/pointing/emulate_touch_from_mouse"):
-		printerr("The Project Setting 'emulate_touch_from_mouse' should be set to True")
 	
 	if not DisplayServer.is_touchscreen_available() and visibility_mode == Visibility_mode.TOUCHSCREEN_ONLY :
 		hide()

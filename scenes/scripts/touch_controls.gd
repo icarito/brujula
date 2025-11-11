@@ -40,7 +40,17 @@ func _input(event):
 			return
 	elif event is InputEventScreenTouch:
 		if event.pressed:
-			# Si hay un nuevo touch, cancelar el temporizador y permitir input
+			# Limitar área táctil de joysticks fijos: solo permitir input si el toque está en la mitad correspondiente
+			var viewport_size = get_viewport().get_visible_rect().size
+			var half_x = viewport_size.x * 0.5
+			if left_joystick and event.position.x <= half_x:
+				pass # El joystick izquierdo responderá normalmente
+			elif right_joystick and event.position.x > half_x:
+				pass # El joystick derecho responderá normalmente
+			else:
+				# Ignorar toques fuera de las áreas válidas
+				return
+			# Cancelar el temporizador y permitir input normal
 			ignore_mouse_due_to_touch = false
 			if _touch_mouse_ignore_timer:
 				_touch_mouse_ignore_timer.stop()
@@ -82,12 +92,81 @@ var player_hud_manager: Control = null
 # Reference to the MobileInputFix node
 var mobile_input_fix: Node = null
 
-# Original crosshair scale for restoration
+
+# Escalado original del crosshair para restaurar
 var original_crosshair_scale: Vector2 = Vector2.ONE
+var crosshair_scaled_for_touch := false
 
 var mouse_motion_relative_threshold := 5.0 # Umbral para relative grande
 
 func _ready():
+	_update_touch_scale()
+
+
+func _notification(what):
+	if what == NOTIFICATION_RESIZED:
+		_update_touch_scale()
+
+# Escalado automático para pantallas pequeñas
+func _update_touch_scale():
+	var viewport_size = get_viewport().get_visible_rect().size
+	var is_small_screen = viewport_size.x < 900 or viewport_size.y < 600
+
+	# Adaptativo: tamaño según lado corto, límites y proporciones
+	var short_side = min(viewport_size.x, viewport_size.y)
+	# Más grandes en móvil, más chicos en normal
+	var joystick_percent = 0.80 if is_small_screen else 0.20
+	var button_percent = 0.22 if is_small_screen else 0.10
+	var joystick_size = clamp(short_side * joystick_percent, 160, 600) if is_small_screen else clamp(short_side * joystick_percent, 80, 180)
+	var button_size = clamp(short_side * button_percent, 80, 220) if is_small_screen else clamp(short_side * button_percent, 48, 96)
+
+	# Calcular margen inferior de 2cm en píxeles reales
+	var dpi = DisplayServer.screen_get_dpi()
+	var margin_cm = 2.0
+	var margin_px = int((dpi / 2.54) * margin_cm)
+	if left_joystick:
+		left_joystick.custom_minimum_size = Vector2(joystick_size, joystick_size)
+		left_joystick.size = Vector2(joystick_size, joystick_size)
+		left_joystick.anchor_left = 0.0
+		left_joystick.anchor_right = 0.0
+		left_joystick.anchor_top = 1.0
+		left_joystick.anchor_bottom = 1.0
+		left_joystick.offset_left = 0
+		left_joystick.offset_bottom = margin_px
+		if "clampzone_size" in left_joystick:
+			left_joystick.clampzone_size = joystick_size * 0.45
+		var left_base = left_joystick.get_node_or_null("Base")
+		if left_base:
+			left_base.custom_minimum_size = Vector2(joystick_size, joystick_size)
+			left_base.size = Vector2(joystick_size, joystick_size)
+	if right_joystick:
+		right_joystick.custom_minimum_size = Vector2(joystick_size, joystick_size)
+		right_joystick.size = Vector2(joystick_size, joystick_size)
+		right_joystick.anchor_left = 1.0
+		right_joystick.anchor_right = 1.0
+		right_joystick.anchor_top = 1.0
+		right_joystick.anchor_bottom = 1.0
+		right_joystick.offset_right = 0
+		right_joystick.offset_bottom = margin_px
+		if "clampzone_size" in right_joystick:
+			right_joystick.clampzone_size = joystick_size * 0.45
+		var right_base = right_joystick.get_node_or_null("Base")
+		if right_base:
+			right_base.custom_minimum_size = Vector2(joystick_size, joystick_size)
+			right_base.size = Vector2(joystick_size, joystick_size)
+	if action_buttons:
+		action_buttons.anchor_left = 1.0
+		action_buttons.anchor_right = 1.0
+		action_buttons.anchor_top = 1.0
+		action_buttons.anchor_bottom = 1.0
+		action_buttons.offset_right = 0
+		action_buttons.offset_bottom = margin_px
+		for btn_name in ["JumpButton", "InteractButton", "SprintButton", "CrouchButton"]:
+			var btn = action_buttons.get_node_or_null(btn_name)
+			if btn:
+				if btn is Control:
+					btn.custom_minimum_size = Vector2(button_size, button_size)
+				btn.scale = Vector2.ONE
 	# Enable on touchscreen devices OR when touch emulation is enabled (for testing)
 	var has_touchscreen = DisplayServer.is_touchscreen_available()
 	var touch_emulation = ProjectSettings.get_setting("input_devices/pointing/emulate_touch_from_mouse", false)
@@ -113,10 +192,12 @@ func _ready():
 					# On hybrid devices, start hidden (mouse mode)
 					visible = (mobile_input_fix.current_mode == mobile_input_fix.InputMode.TOUCH)
 				# Conectar señal para ignorar el primer mouse motion tras cambio de modo
-				mobile_input_fix.connect("input_mode_changed", Callable(self, "_on_input_mode_changed"))
+				if not mobile_input_fix.is_connected("input_mode_changed", Callable(self, "_on_input_mode_changed")):
+					mobile_input_fix.connect("input_mode_changed", Callable(self, "_on_input_mode_changed"))
 			# Conectar señal para ignorar el siguiente mouse motion sintético tras warp_mouse
 			if mobile_input_fix.has_signal("ignore_next_mouse_motion"):
-				mobile_input_fix.connect("ignore_next_mouse_motion", Callable(self, "_on_ignore_next_mouse_motion"))
+				if not mobile_input_fix.is_connected("ignore_next_mouse_motion", Callable(self, "_on_ignore_next_mouse_motion")):
+					mobile_input_fix.connect("ignore_next_mouse_motion", Callable(self, "_on_ignore_next_mouse_motion"))
 
 		# Try to find the neck and head nodes
 		var body = player.get_node_or_null("Body")
@@ -131,15 +212,21 @@ func _ready():
 			player_hud_manager = hud_path
 			var crosshair = player_hud_manager.get_node_or_null("Crosshair")
 			if crosshair:
-				original_crosshair_scale = crosshair.scale
-				# Enlarge crosshair for touch mode
-				crosshair.scale = original_crosshair_scale * 1.5
+				if not crosshair_scaled_for_touch:
+					original_crosshair_scale = crosshair.scale
+					crosshair.scale = original_crosshair_scale * 1.5
+					crosshair_scaled_for_touch = true
+			elif crosshair_scaled_for_touch:
+				# Si el crosshair ya no existe, resetea el flag
+				crosshair_scaled_for_touch = false
 
-		# Conectar a señales de menú del player
+		# Conectar a señales de menú del player evitando duplicados
 		if player and player.has_signal("menu_opened"):
-			player.connect("menu_opened", Callable(self, "_on_menu_opened"))
+			if not player.is_connected("menu_opened", Callable(self, "_on_menu_opened")):
+				player.connect("menu_opened", Callable(self, "_on_menu_opened"))
 		if player and player.has_signal("menu_closed"):
-			player.connect("menu_closed", Callable(self, "_on_menu_closed"))
+			if not player.is_connected("menu_closed", Callable(self, "_on_menu_closed")):
+				player.connect("menu_closed", Callable(self, "_on_menu_closed"))
 
 func _process(delta):
 	if ignore_timer > 0:
